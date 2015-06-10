@@ -1,0 +1,173 @@
+﻿@model IMR.Areas.BO.Models.ArticleBO
+
+@{
+    var submitButtonName = Model.ArticleId == 0 ? "Create" : "Update";
+    ViewBag.Title = Model.ArticleId == 0 ? "Create New Article" : "Update Article #" + Model.ArticleId;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("Create", "ArticleBO", null, FormMethod.Post, new { enctype = "multipart/form-data", style = "display: inline-block;" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" id="ArticleId" name="ArticleId" value="@Model.ArticleId" />
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Avatar)
+                <input type="file" id="AvatarFile" name="AvatarFile" accept="image/*" />
+                <input type="hidden" id="Avatar" name="Avatar" value="@Model.Avatar" />
+            </div>
+            <div class="form-group">
+                <label for="RelatedArticles">Related Articles</label>
+                <input type="text" class="form-control" id="RelatedArticleIds" name="RelatedArticleIds" data-value="@Model.RelatedArticleIds" placeholder="Related Articles">
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div role="tabpanel">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab" data-toggle="tab">English</a></li>
+                    <li role="presentation"><a href="#de" aria-controls="de" role="tab" data-toggle="tab">Deutsch</a></li>
+                    <li role="presentation"><a href="#vi" aria-controls="vi" role="tab" data-toggle="tab">Tiếng Việt</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="en">
+                        <input type="hidden" id="IdEn" name="IdEn" value="@Model.IdEn" />
+                        <div class="form-group">
+                            <label for="TitleEn">Title</label>
+                            <input type="text" class="form-control" id="TitleEn" name="TitleEn" value="@Model.TitleEn" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="DescriptionEn">Description</label>
+                            <textarea class="form-control" id="DescriptionEn" name="DescriptionEn" placeholder="Description" rows="4">@Model.DescriptionEn</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ContentEn">Content</label>
+                            <textarea class="form-control" id="ContentEn" name="ContentEn" placeholder="Content" rows="4">@Model.ContentEn</textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="de">
+                        <input type="hidden" id="IdDe" name="IdDe" value="@Model.IdDe" />
+                        <div class="form-group">
+                            <label for="TitleDe">Title</label>
+                            <input type="text" class="form-control" id="TitleDe" name="TitleDe" value="@Model.TitleDe" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="DescriptionDe">Description</label>
+                            <textarea class="form-control" id="DescriptionDe" name="DescriptionDe" placeholder="Description" rows="4">@Model.DescriptionDe</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ContentDe">Content</label>
+                            <textarea class="form-control" id="ContentDe" name="ContentDe" placeholder="Content" rows="4">@Model.ContentDe</textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="vi">
+                        <input type="hidden" id="IdVi" name="IdVi" value="@Model.IdVi" />
+                        <div class="form-group">
+                            <label for="TitleVi">Title</label>
+                            <input type="text" class="form-control" id="TitleVi" name="TitleVi" value="@Model.TitleVi" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="DescriptionVi">Description</label>
+                            <textarea class="form-control" id="DescriptionVi" name="DescriptionVi" placeholder="Description" rows="4">@Model.DescriptionVi</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ContentVi">Content</label>
+                            <textarea class="form-control" id="ContentVi" name="ContentVi" placeholder="Content" rows="4">@Model.ContentVi</textarea>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <input type="submit" value="@submitButtonName" class="btn btn-primary pull-right" />
+            <a href="@Url.Action("Index")" class="btn btn-default">Back to List</a>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $("#AvatarFile").fileinput({
+                browseClass: "btn btn-success btn-block",
+                browseLabel: "&nbsp;Pick Image",
+                browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                showCaption: false,
+                showRemove: false,
+                showUpload: false,
+                initialPreview: [
+                    "<img src='/img/@Model.Avatar' class='file-preview-image' alt='@Model.Avatar' title='@Model.Avatar' style='width:100%;height:auto;'><div class='file-thumbnail-footer'><div class='file-caption-name' title='@Model.Avatar'>@Model.Avatar</div></div>"
+                ],
+                previewSettings: {
+                    image: { width: "100%", height: "auto" }
+                },
+                layoutTemplates: {
+                    footer: '<div class="file-thumbnail-footer">\n' +
+                            '    <div class="file-caption-name" style="width:auto">{caption}</div>\n' +
+                            '    {actions}\n' +
+                            '</div>'
+                }
+            });
+
+            tinymce.init({
+                selector: "textarea",
+                theme: "modern",
+                plugins: [
+                    "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                    "searchreplace wordcount visualblocks visualchars code fullscreen",
+                    "insertdatetime media nonbreaking save table contextmenu directionality",
+                    "emoticons template paste textcolor colorpicker textpattern"
+                ],
+                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                toolbar2: "print preview media | forecolor backcolor emoticons",
+                image_advtab: true,
+                templates: [
+                    { title: 'Test template 1', content: 'Test 1' },
+                    { title: 'Test template 2', content: 'Test 2' }
+                ],
+                init_instance_callback: function () {
+                    $.each(tinyMCE.editors, function (i, editor) {
+                        editor.setContent($('#' + editor.id).val());
+                    });
+                }
+            });
+
+            var articles = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ArticleId'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '@Url.Action("GetArticles")' + '?query=%QUERY&ArticleId=' + @Model.ArticleId
+                }
+            });
+            articles.initialize();
+
+            $('#RelatedArticleIds').tagsinput({
+                itemValue: 'ArticleId',
+                itemText: 'Title',
+                typeaheadjs: {
+                    name: 'articles',
+                    displayKey: 'Title',
+                    source: articles.ttAdapter()
+                }
+            });
+
+            var relatedArticles = $.parseJSON($('#RelatedArticleIds').attr('data-value'));
+            $.each(relatedArticles, function (index, relatedArticle) {
+                $('#RelatedArticleIds').tagsinput('add', relatedArticle);
+            });
+        });
+    </script>
+}

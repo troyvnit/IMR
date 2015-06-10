@@ -1,0 +1,58 @@
+﻿@model IEnumerable<IMR.Areas.BO.Models.ArticleBO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/BO/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Articles</h2>
+<hr>
+<p>
+    <a class ="btn btn-primary" href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New</a>
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            Avatar
+        </th>
+        <th>
+            Title (En)
+        </th>
+        <th>
+            Title (De)
+        </th>
+        <th>
+            Title (Vi)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.ArticleId
+            </td>
+            <td class="col-md-1">
+                <img src="~/img/@item.Avatar" width="50" height="50" />
+            </td>
+            <td class="col-md-3">
+                @item.TitleEn
+            </td>
+            <td class="col-md-3">
+                @item.TitleDe
+            </td>
+            <td class="col-md-3">
+                @item.TitleVi
+            </td>
+            <td>
+                <a class="btn btn-info" href="@Url.Action("Create", new { id = item.ArticleId })"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = item.ArticleId })"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+            </td>
+        </tr>
+    }
+
+</table>
