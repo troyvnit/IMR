@@ -1,5 +1,4 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
@@ -23,16 +22,39 @@ textarea {
     max-width: 280px;
 }
 
-/*BO*/
-.tab-pane{
-    padding: 15px;
+.header{
+    padding: 40px;
+    position: relative;
 }
 
-.tab-pane .form-group{
-    margin-left: 0;
-    margin-right: 0;
+.header p{
+    position: absolute;
+    max-width: 600px;
+    top: 80px;
+    left: 200px;
+    font-size: 15px;
+    font-style: italic;
+    color: #666666;
 }
 
-.tab-pane .form-group .form-control{
-    max-width: 100%;
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+    color: white;
+    background-color: black;
+}
+
+.navbar-default .navbar-nav > li:first-child > a{
+      margin-left: -15px;
+      padding-left: 30px;
+      border-radius: 15px 0 0 15px;
+}
+
+.nav > li > a {
+    padding: 15px 20px;
+}
+
+/*Responsive*/
+@media (min-width: 768px){
+    .menu {
+      border-radius: 15px;
+    }
 }

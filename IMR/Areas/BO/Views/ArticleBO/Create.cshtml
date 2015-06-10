@@ -3,7 +3,7 @@
 @{
     var submitButtonName = Model.ArticleId == 0 ? "Create" : "Update";
     ViewBag.Title = Model.ArticleId == 0 ? "Create New Article" : "Update Article #" + Model.ArticleId;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/BO/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@ViewBag.Title</h2>
