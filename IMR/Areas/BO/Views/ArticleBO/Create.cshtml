@@ -90,7 +90,7 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12" style="padding-left: 0;">
             <input type="submit" value="@submitButtonName" class="btn btn-primary pull-right" />
             <a href="@Url.Action("Index")" class="btn btn-default">Back to List</a>
         </div>
@@ -149,7 +149,7 @@
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ArticleId'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
                 remote: {
-                    url: '@Url.Action("GetArticles")' + '?query=%QUERY&ArticleId=' + @Model.ArticleId
+                    url: '@Url.Action("GetArticles")' + '?query=%QUERY&ArticleId=' + '@Model.ArticleId'
                 }
             });
             articles.initialize();

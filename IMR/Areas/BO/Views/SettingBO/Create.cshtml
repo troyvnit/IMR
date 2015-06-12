@@ -1,0 +1,131 @@
+﻿@model IMR.Areas.BO.Models.SettingBO
+
+@{
+    var submitButtonName = Model.SettingId == 0 ? "Create" : "Update";
+    ViewBag.Title = Model.SettingId == 0 ? "Create New Setting" : "Update Setting #" + Model.SettingId;
+    Layout = "~/Areas/BO/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("Create", "SettingBO", null, FormMethod.Post, new { enctype = "multipart/form-data", style = "display: inline-block;" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" id="SettingId" name="SettingId" value="@Model.SettingId" />
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Avatar)
+                <input type="file" id="AvatarFile" name="AvatarFile" accept="image/*" />
+                <input type="hidden" id="Avatar" name="Avatar" value="@Model.Avatar" />
+            </div>
+            <div class="form-group">
+                <label for="SettingType">SettingType</label>
+                <select class="form-control" id="SettingType" name="SettingType" data-value="@Model.SettingType">
+                    <option value="Menu">Menu</option>
+                    <option value="HomePage_MainBox">Home Page Main Box</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div role="tabpanel">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#en" aria-controls="en" role="tab" data-toggle="tab">English</a></li>
+                    <li role="presentation"><a href="#de" aria-controls="de" role="tab" data-toggle="tab">Deutsch</a></li>
+                    <li role="presentation"><a href="#vi" aria-controls="vi" role="tab" data-toggle="tab">Tiếng Việt</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="en">
+                        <input type="hidden" id="IdEn" name="IdEn" value="@Model.IdEn" />
+                        <div class="form-group">
+                            <label for="NameEn">Name</label>
+                            <input type="text" class="form-control" id="NameEn" name="NameEn" value="@Model.NameEn" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="DescriptionEn">Description</label>
+                            <input type="text" class="form-control" id="DescriptionEn" name="DescriptionEn" value="@Model.DescriptionEn" placeholder="Description">
+                        </div>
+                        <div class="form-group">
+                            <label for="LinkEn">Link</label>
+                            <input type="text" class="form-control" id="LinkEn" name="LinkEn" value="@Model.LinkEn" placeholder="Link">
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="de">
+                        <input type="hidden" id="IdDe" name="IdDe" value="@Model.IdDe" />
+                        <div class="form-group">
+                            <label for="NameDe">Name</label>
+                            <input type="text" class="form-control" id="NameDe" name="NameDe" value="@Model.NameDe" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="DescriptionDe">Description</label>
+                            <input type="text" class="form-control" id="DescriptionDe" name="DescriptionDe" value="@Model.DescriptionDe" placeholder="Description">
+                        </div>
+                        <div class="form-group">
+                            <label for="LinkDe">Link</label>
+                            <input type="text" class="form-control" id="LinkDe" name="LinkDe" value="@Model.LinkDe" placeholder="Link">
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="vi">
+                        <input type="hidden" id="IdVi" name="IdVi" value="@Model.IdVi" />
+                        <div class="form-group">
+                            <label for="NameVi">Name</label>
+                            <input type="text" class="form-control" id="NameVi" name="NameVi" value="@Model.NameVi" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="DescriptionVi">Description</label>
+                            <input type="text" class="form-control" id="DescriptionVi" name="DescriptionVi" value="@Model.DescriptionVi" placeholder="Description">
+                        </div>
+                        <div class="form-group">
+                            <label for="LinkVi">Link</label>
+                            <input type="text" class="form-control" id="LinkVi" name="LinkVi" value="@Model.LinkVi" placeholder="Link">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-12" style="padding-left: 0;">
+            <input type="submit" value="@submitButtonName" class="btn btn-primary pull-right" />
+            <a href="@Url.Action("Index")" class="btn btn-default">Back to List</a>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $("#AvatarFile").fileinput({
+                browseClass: "btn btn-success btn-block",
+                browseLabel: "&nbsp;Pick Image",
+                browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                showCaption: false,
+                showRemove: false,
+                showUpload: false,
+                initialPreview: [
+                    "<img src='/img/@Model.Avatar' class='file-preview-image' alt='@Model.Avatar' title='@Model.Avatar' style='width:100%;height:auto;'><div class='file-thumbnail-footer'><div class='file-caption-name' title='@Model.Avatar'>@Model.Avatar</div></div>"
+                ],
+                previewSettings: {
+                    image: { width: "100%", height: "auto" }
+                },
+                layoutTemplates: {
+                    footer: '<div class="file-thumbnail-footer">\n' +
+                            '    <div class="file-caption-name" style="width:auto">{caption}</div>\n' +
+                            '    {actions}\n' +
+                            '</div>'
+                }
+            });
+
+            $('#SettingType').val($('#SettingType').attr('data-value'));
+        });
+    </script>
+}

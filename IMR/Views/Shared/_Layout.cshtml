@@ -28,18 +28,23 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                <ul class="language pull-right">
+                    <li>@Html.ActionLink("En", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) | </li>
+                    <li>@Html.ActionLink("De", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) | </li>
+                    <li>@Html.ActionLink("Vi", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <div class="tuev-logo"><a href="http://www.imrgmbh.de/en/quality.html"><img src="~/img/tuev_logo.jpg" alt=""></a></div>
+            <p>&copy; @DateTime.Now.Year, IMR GmbH</p>
+            <ul>
+                <li><a href="en/contact.html">Contact</a>&nbsp;|&nbsp;</li>
+                <li><a href="en/disclaimer.html">Disclaimer</a></li>
+            </ul>
         </footer>
     </div>
 

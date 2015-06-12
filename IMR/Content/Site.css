@@ -1,5 +1,6 @@
 ﻿body {
     padding-bottom: 20px;
+    color: #666666;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,23 +24,57 @@ textarea {
 }
 
 .header{
-    padding: 40px;
+    padding: 30px 40px;
     position: relative;
 }
 
 .header p{
     position: absolute;
     max-width: 600px;
-    top: 80px;
+    top: 70px;
     left: 200px;
     font-size: 15px;
     font-style: italic;
     color: #666666;
 }
 
+.menu{
+    background-color: #9c9c9c;
+    border: none;
+    -webkit-box-shadow: 0px 8px 15px 5px rgba(50, 50, 50, 0.6);
+    -moz-box-shadow:    0px 8px 15px 5px rgba(50, 50, 50, 0.6);
+    box-shadow:         0px 8px 15px 5px rgba(50, 50, 50, 0.6);
+    margin-bottom: 25px;
+}
+
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
-    color: white;
-    background-color: black;
+    color: #e6e6e6;
+    background-color: #646464;
+}
+
+.language{
+  list-style: none;
+  line-height: 48px;
+  margin-bottom: 0;
+  padding-right: 15px;
+}
+
+.language > li{
+    display: inline-block;
+    color: #646464;
+    font-size: 12px;
+}
+
+.language > li > a{
+    vertical-align: middle;
+    color: #e6e6e6;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.language > li > a:hover, .language > li > a:focus{
+    color: #646464;
+    background-color: transparent;
 }
 
 .navbar-default .navbar-nav > li:first-child > a{
@@ -48,13 +83,95 @@ textarea {
       border-radius: 15px 0 0 15px;
 }
 
-.nav > li > a {
+.navbar-default .navbar-nav > li > a {
     padding: 15px 20px;
+    color: #e6e6e6;
+    font-size: 14px;
+}
+
+.container .jumbotron,
+.container-fluid .jumbotron {
+  border-radius: 15px;
+    -webkit-box-shadow: 0px 8px 15px 5px rgba(50, 50, 50, 0.6);
+    -moz-box-shadow:    0px 8px 15px 5px rgba(50, 50, 50, 0.6);
+    box-shadow:         0px 8px 15px 5px rgba(50, 50, 50, 0.6);
+    height: 270px;
+    padding: 5px;
+    background-color: #E9E9E9;
+}
+
+.main-box h3{
+    font-size: 16px;
+    font-family: "Times New Roman", Times, serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.main-box div{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.main-box div:first-child{
+    padding-left: 15px;
+    border-right: 1px solid #D6D6D6;
+}
+
+.main-box div:last-child{
+    padding-right: 15px;
+    border-left: 1px solid #D6D6D6;
+}
+
+.main-box img{
+    float: right;
+}
+
+.main-box p{
+  font-size: 12px;
+}
+
+footer{
+   background: url(/img/bgfooter.gif) no-repeat bottom;
+   min-height: 135px;
+   font-size: 12px;
+}
+
+footer p {
+  clear: both;
+  float: left;
+}
+
+footer ul {
+   float: right;
+  margin-right: -10px;
+}
+
+footer ul li {
+   display: inline;
+}
+
+footer ul li a, footer ul li a:hover{
+    color: #666666;
+    text-decoration: none;
+    margin: 0 10px 0 7px;
+}
+
+footer .tuev-logo{
+    float: right;
+    padding-bottom: 25px;
 }
 
 /*Responsive*/
 @media (min-width: 768px){
     .menu {
       border-radius: 15px;
+    }
+}
+
+@media (min-width: 1200px){
+    .container {
+      width: 970px;
     }
 }

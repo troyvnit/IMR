@@ -11,6 +11,7 @@ using IMR.Models;
 using IMR.Models.Enums;
 using AutoMapper;
 using IMR.Areas.BO.Models;
+using IMR.Utils;
 
 namespace IMR.Areas.BO.Controllers
 {
@@ -23,21 +24,6 @@ namespace IMR.Areas.BO.Controllers
         {
             var articles = db.Articles.Include(a => a.ArticleDetails).Include(a => a.RelatedArticles).ToList();
             return View(articles.Select(a => Mapper.Map<ArticleBO>(a)));
-        }
-
-        // GET: BO/ArticleBO/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Article article = db.Articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
-            return View(article);
         }
 
         // GET: BO/ArticleBO/Create
@@ -67,9 +53,9 @@ namespace IMR.Areas.BO.Controllers
             {
                 var article = Mapper.Map<Article>(articleBO);
                 article.ArticleDetails = new List<ArticleDetail> { 
-                    new ArticleDetail { ArticleId = articleBO.ArticleId, ArticleDetailId = articleBO.IdEn, Language = Language.En, Title = articleBO.TitleEn, Description = articleBO.DescriptionEn, Content = articleBO.ContentEn }, 
-                    new ArticleDetail { ArticleId = articleBO.ArticleId, ArticleDetailId = articleBO.IdDe, Language = Language.De, Title = articleBO.TitleDe, Description = articleBO.DescriptionDe, Content = articleBO.ContentDe }, 
-                    new ArticleDetail { ArticleId = articleBO.ArticleId, ArticleDetailId = articleBO.IdVi, Language = Language.Vi, Title = articleBO.TitleVi, Description = articleBO.DescriptionVi, Content = articleBO.ContentVi }
+                    new ArticleDetail { ArticleId = articleBO.ArticleId, ArticleDetailId = articleBO.IdEn, Language = Language.En, SeoTitle = articleBO.TitleEn.GenerateSeoTitle(), Title = articleBO.TitleEn, Description = articleBO.DescriptionEn, Content = articleBO.ContentEn }, 
+                    new ArticleDetail { ArticleId = articleBO.ArticleId, ArticleDetailId = articleBO.IdDe, Language = Language.De, SeoTitle = articleBO.TitleDe.GenerateSeoTitle(), Title = articleBO.TitleDe, Description = articleBO.DescriptionDe, Content = articleBO.ContentDe }, 
+                    new ArticleDetail { ArticleId = articleBO.ArticleId, ArticleDetailId = articleBO.IdVi, Language = Language.Vi, SeoTitle = articleBO.TitleVi.GenerateSeoTitle(), Title = articleBO.TitleVi, Description = articleBO.DescriptionVi, Content = articleBO.ContentVi }
                 };
                 if (AvatarFile != null && AvatarFile.ContentLength > 0)
                 {
@@ -108,37 +94,6 @@ namespace IMR.Areas.BO.Controllers
             }
 
             return View(articleBO);
-        }
-
-        // GET: BO/ArticleBO/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Article article = db.Articles.Find(id);
-            if (article == null)
-            {
-                return HttpNotFound();
-            }
-            return View(article);
-        }
-
-        // POST: BO/ArticleBO/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArticleId,Avatar")] Article article)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(article).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(article);
         }
 
         // GET: BO/ArticleBO/Delete/5

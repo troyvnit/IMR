@@ -17,7 +17,8 @@ namespace IMR.DAL
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticleDetail> ArticleDetails { get; set; }
-        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+        public DbSet<SettingDetail> SettingDetails { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new ArticleMap());

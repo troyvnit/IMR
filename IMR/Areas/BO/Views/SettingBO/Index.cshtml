@@ -1,0 +1,65 @@
+﻿@model IEnumerable<IMR.Areas.BO.Models.SettingBO>
+
+@{
+    ViewBag.Name = "Index";
+    Layout = "~/Areas/BO/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Settings</h2>
+<hr>
+<p>
+    <a class="btn btn-primary" href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New</a>
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            Avatar
+        </th>
+        <th>
+            Setting Type
+        </th>
+        <th>
+            Name (En)
+        </th>
+        <th>
+            Name (De)
+        </th>
+        <th>
+            Name (Vi)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-1">
+                @item.SettingId
+            </td>
+            <td class="col-md-1">
+                <img src="~/img/@item.Avatar" width="50" height="50" />
+            </td>
+            <td class="col-md-2">
+                @item.SettingType.ToString()
+            </td>
+            <td class="col-md-2">
+                @item.NameEn
+            </td>
+            <td class="col-md-2">
+                @item.NameDe
+            </td>
+            <td class="col-md-2">
+                @item.NameVi
+            </td>
+            <td class="col-md-1">
+                <a class="btn btn-info" href="@Url.Action("Create", new { id = item.SettingId })"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = item.SettingId })"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+            </td>
+        </tr>
+    }
+
+</table>
+

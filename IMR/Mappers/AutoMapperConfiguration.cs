@@ -31,6 +31,7 @@ namespace IMR.Mappers
             protected override void Configure()
             {
                 Mapper.CreateMap<ArticleBO, Article>();
+                Mapper.CreateMap<SettingBO, Setting>();
             }
         }
 
@@ -61,6 +62,19 @@ namespace IMR.Mappers
                         var relatedArticles = x.RelatedArticles ?? new List<Article>();
                         return JsonConvert.SerializeObject(x.RelatedArticles.Select(ra => new { ra.ArticleId, ra.ArticleDetails.FirstOrDefault(ad => ad.Language == Language.En).Title }));
                     }));
+                Mapper.CreateMap<Setting, SettingBO>()
+                    .ForMember(a => a.IdEn, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.En).SettingDetailId : 0))
+                    .ForMember(a => a.IdDe, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.De).SettingDetailId : 0))
+                    .ForMember(a => a.IdVi, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi).SettingDetailId : 0))
+                    .ForMember(a => a.NameEn, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.En).Name : string.Empty))
+                    .ForMember(a => a.NameDe, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.De).Name : string.Empty))
+                    .ForMember(a => a.NameVi, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi).Name : string.Empty))
+                    .ForMember(a => a.DescriptionEn, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.En).Description : string.Empty))
+                    .ForMember(a => a.DescriptionDe, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.De).Description : string.Empty))
+                    .ForMember(a => a.DescriptionVi, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi).Description : string.Empty))
+                    .ForMember(a => a.LinkEn, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.En).Link : string.Empty))
+                    .ForMember(a => a.LinkDe, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.De).Link : string.Empty))
+                    .ForMember(a => a.LinkVi, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi).Link : string.Empty));
             }
         }
     }

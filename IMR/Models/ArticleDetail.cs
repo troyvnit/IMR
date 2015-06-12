@@ -8,7 +8,8 @@ namespace IMR.Models
 {
     public class ArticleDetail
     {
-        public int ArticleDetailId { get; set; } 
+        public int ArticleDetailId { get; set; }
+        public string SeoTitle { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }
