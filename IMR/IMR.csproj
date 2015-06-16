@@ -159,6 +159,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\IMRResources.en.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IMRResources.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\IMRResources.de.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IMRResources.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\IMRResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IMRResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -170,6 +185,8 @@
     <Compile Include="Areas\BO\Models\ArticleBO.cs" />
     <Compile Include="Areas\BO\Models\SettingBO.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Attributes\LocalizationAttribute.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\IMRContext.cs" />
@@ -191,6 +208,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\SeoFactory.cs" />
+    <Compile Include="ViewModels\ArticleVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-tagsinput.css" />
@@ -206,10 +224,13 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\bgfooter.gif" />
+    <Content Include="img\icon_contact.jpg" />
     <Content Include="img\loading-sm.gif" />
     <Content Include="img\loading.gif" />
     <Content Include="img\logo_IMR.gif" />
     <Content Include="img\no-avatar.jpg" />
+    <Content Include="img\punkt_unternavigation.gif" />
+    <Content Include="img\punkt_unternavigation_hover.gif" />
     <Content Include="img\tuev_logo.jpg" />
     <Content Include="Scripts\bootstrap-tagsinput.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -361,9 +382,11 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Views\Home\Article.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -371,6 +394,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\IMRResources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IMRResources.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\IMRResources.de.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IMRResources.de.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\IMRResources.en.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>IMRResources.en.designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

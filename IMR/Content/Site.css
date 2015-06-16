@@ -1,6 +1,7 @@
 ﻿body {
     padding-bottom: 20px;
     color: #666666;
+    font-size: 12px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -161,6 +162,81 @@ footer ul li a, footer ul li a:hover{
 footer .tuev-logo{
     float: right;
     padding-bottom: 25px;
+}
+
+article h2{
+    font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: normal;
+  margin-bottom: 20px;
+  color: #727272;
+  line-height: 33px;
+}
+
+article .description{
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+article .content{
+    margin-bottom: 50px;
+  display: inline-block;
+}
+
+.left-panel{
+      margin-top: 90px;
+}
+
+.left-panel .unternavigation{
+      border-top: 1px solid #cacaca;
+  margin: 13px 0 47px 0;
+  list-style: none;
+  padding: 0;
+}
+
+.left-panel .unternavigation li {
+  border-bottom: 1px solid #cacaca;
+  padding: 8px 0 6px 0;
+}
+
+.left-panel .unternavigation li a{  
+    color: #666666;
+  text-decoration: none;
+      padding-left: 20px;
+  background: url(/img/punkt_unternavigation.gif) no-repeat 0 3px;
+}
+
+.left-panel .unternavigation li a:hover{
+  background: url(/img/punkt_unternavigation_hover.gif) no-repeat 0 3px;
+}
+
+.left-panel > img{
+    width: 100%;
+  margin-bottom: 60px;
+}
+
+.left-panel .address{
+    border-top: 1px solid #cacaca;
+  border-bottom: 1px solid #cacaca;
+  padding: 15px 0 16px 0;
+}
+
+.left-panel .contact{
+      border-bottom: 1px solid #cacaca;
+  padding: 20px 0 16px 0;
+}
+
+.left-panel .contact a{
+  color: #666666;
+    text-decoration: none;
+}
+
+.left-panel .contact img{
+  float: left;
+}
+
+.left-panel .contact p{
+  padding: 0 25px 0 70px;
 }
 
 /*Responsive*/

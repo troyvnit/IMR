@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
+using IMR.ViewModels;
+using System.Threading;
 
 namespace IMR.Mappers
 {
@@ -75,6 +77,10 @@ namespace IMR.Mappers
                     .ForMember(a => a.LinkEn, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.En).Link : string.Empty))
                     .ForMember(a => a.LinkDe, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.De).Link : string.Empty))
                     .ForMember(a => a.LinkVi, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi).Link : string.Empty));
+                Mapper.CreateMap<Article, ArticleVM>()
+                    .ForMember(a => a.Title, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Title : ""))
+                    .ForMember(a => a.Description, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Description : ""))
+                    .ForMember(a => a.Content, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Content : ""));
             }
         }
     }

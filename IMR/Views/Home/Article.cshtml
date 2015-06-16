@@ -1,0 +1,34 @@
+﻿@model IMR.ViewModels.ArticleVM
+@{
+    ViewBag.Title = "Article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-3 left-panel">
+        <ul class="unternavigation"><li><a href="en/services/accounts-payable-management.html">Accounts payable management</a></li><li><a href="en/services/digital-mail-processing.html">Digital mail processing</a></li><li><a href="en/services/contract-documents.html">Contract documents</a></li><li><a href="en/services/building-records.html">Building records</a></li><li><a href="en/services/drawings-and-plans.html">Drawings and plans</a></li><li><a href="en/services/data-entry.html">Data entry</a></li><li><a href="en/services/billing-data-entry.html">Billing data entry</a></li><li><a href="en/services/archiving-system.html">Archiving system</a></li><li><a href="en/services/better-to-be-safe-than-sorry.html">Better to be safe than sorry</a></li></ul>
+        <img src="~/img/@Model.Avatar" />
+        <div class="address">
+            <strong>IMR Image-Management GmbH</strong>
+            <br>
+            Neue Weilheimer Straße 14
+            <br>
+            73230 Kirchheim u. Teck
+            <br><br>
+            Tel.: 07021 485078
+            <br>
+            Fax.:  07021 83411
+        </div>
+        <div class="contact">
+            <a href="en/contact.html">
+                <img src="~/img/icon_contact.jpg" alt="">
+                <p>Please use our contact form to get in touch with us.</p>
+            </a>
+        </div>
+    </div>
+    <article class="col-sm-9">
+        <h2>@Model.Title</h2>
+        <span class="description">@Html.Raw(Model.Description)</span>
+        <span class="content">@Html.Raw(Model.Content)</span>
+    </article>
+</div>
+

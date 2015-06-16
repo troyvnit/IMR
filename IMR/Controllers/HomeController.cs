@@ -2,6 +2,7 @@
 using IMR.Areas.BO.Models;
 using IMR.DAL;
 using IMR.Models.Enums;
+using IMR.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +13,7 @@ using System.Web.Mvc;
 
 namespace IMR.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private IMRContext db = new IMRContext();
         public ActionResult Index()
@@ -22,8 +23,12 @@ namespace IMR.Controllers
 
         public ActionResult Article(string seoTitle)
         {
-            var article = db.Articles.Include(a => a.ArticleDetails).Include(a => a.RelatedArticles).FirstOrDefault(a => a.ArticleDetails.FirstOrDefault(ad => ad.Language == Language.En).SeoTitle == seoTitle);
-            return View(Mapper.Map<ArticleBO>(article));
+            var article = db.Articles.Include(a => a.ArticleDetails).Include(a => a.RelatedArticles).FirstOrDefault(a => a.ArticleDetails.Count(ad => ad.SeoTitle == seoTitle) > 0);
+            if (article == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Mapper.Map<ArticleVM>(article));
         }
 
         public ActionResult About()
