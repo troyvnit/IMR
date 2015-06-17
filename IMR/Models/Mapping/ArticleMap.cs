@@ -10,12 +10,6 @@ namespace IMR.Models.Mapping
     {
         public ArticleMap()
         {
-            HasMany(a => a.RelatedArticles).WithMany().Map(x => 
-            {
-                x.MapLeftKey("Article_ArticleId");
-                x.MapRightKey("Article_ArticleId1");
-                x.ToTable("Article_RelatedArticles");
-            });
         }
     }
 }

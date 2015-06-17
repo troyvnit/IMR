@@ -22,23 +22,27 @@ namespace IMR.Areas.BO.Controllers
         // GET: BO/ArticleBO
         public ActionResult Index()
         {
-            var articles = db.Articles.Include(a => a.ArticleDetails).Include(a => a.RelatedArticles).ToList();
+            var articles = db.Articles.Include(a => a.ArticleDetails).ToList();
             return View(articles.Select(a => Mapper.Map<ArticleBO>(a)));
         }
 
         // GET: BO/ArticleBO/Create
         public ActionResult Create(int? id)
         {
+            var articleCategories = db.ArticleCategories.ToList();
+            ViewBag.ArticleCategories = articleCategories.Select(ac => Mapper.Map<ArticleCategoryBO>(ac));
             if (id == null)
             {
                 return View(new ArticleBO { Avatar = "no-avatar.jpg" });
             }
-            Article article = db.Articles.Include(a => a.ArticleDetails).Include(a => a.RelatedArticles).Include(a => a.RelatedArticles.Select(ra => ra.ArticleDetails)).FirstOrDefault(a => a.ArticleId == id);
+            Article article = db.Articles.Include(a => a.ArticleDetails).FirstOrDefault(a => a.ArticleId == id);
             if (article == null)
             {
                 return HttpNotFound();
             }
-            return View(Mapper.Map<ArticleBO>(article));
+            var articleBO = Mapper.Map<ArticleBO>(article);
+            articleBO.IsMain = article.ArticleCategory.MainArticleId == article.ArticleId ? "checked" : "";
+            return View(articleBO);
         }
 
         // POST: BO/ArticleBO/Create
@@ -63,6 +67,12 @@ namespace IMR.Areas.BO.Controllers
                     AvatarFile.SaveAs(Server.MapPath(path));
                     article.Avatar = AvatarFile.FileName;
                 }
+                var articleCategory = db.ArticleCategories.Include(ac => ac.Articles).FirstOrDefault(ac => ac.ArticleCategoryId == articleBO.ArticleCategoryId);
+                if (articleCategory != null)
+                {
+                    article.ArticleCategoryId = articleCategory.ArticleCategoryId;
+                    article.ArticleCategory = articleCategory;
+                }
                 if (article.ArticleId != 0)
                 {
                     db.Entry(article).State = EntityState.Modified;
@@ -73,23 +83,13 @@ namespace IMR.Areas.BO.Controllers
                     db.Articles.Add(article);
                     db.SaveChanges();
                 }
-                var savedArticle = db.Articles.Include(a => a.ArticleDetails).Include(a => a.RelatedArticles).FirstOrDefault(a => a.ArticleId == article.ArticleId);
-                savedArticle.RelatedArticles = new List<Article>();
-                if (!string.IsNullOrEmpty(articleBO.RelatedArticleIds))
+                if (articleBO.IsMain == "on")
                 {
-                    var relatedArticleIds = articleBO.RelatedArticleIds.Split(',');
-                    foreach (var relatedArticleIdString in relatedArticleIds)
-                    {
-                        var relatedArticleId = int.Parse(relatedArticleIdString);
-                        var relatedArticle = db.Articles.FirstOrDefault(a => a.ArticleId == relatedArticleId);
-                        if (relatedArticle != null)
-                        {
-                            savedArticle.RelatedArticles.Add(relatedArticle);
-                        }
-                    }
+                    articleCategory.MainArticleId = article.ArticleId;
+                    articleCategory.MainArticle = article;
+                    db.Entry(articleCategory).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
-                db.Entry(article).State = EntityState.Modified;
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -128,6 +128,21 @@ namespace IMR.Areas.BO.Controllers
                 Title = a.ArticleDetails.FirstOrDefault(ad => ad.Language == Language.En) != null ? 
                 a.ArticleDetails.FirstOrDefault(ad => ad.Language == Language.En).Title : "" 
             }), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult CreateCategory(ArticleCategoryBO articleCategoryBO){
+            var articleCategory = Mapper.Map<ArticleCategory>(articleCategoryBO);
+            if (articleCategory.ArticleCategoryId != 0)
+            {
+                db.Entry(articleCategory).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                db.ArticleCategories.Add(articleCategory);
+                db.SaveChanges();
+            }
+            return Json(Mapper.Map<ArticleCategoryBO>(articleCategory), JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

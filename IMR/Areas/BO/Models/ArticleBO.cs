@@ -21,6 +21,7 @@ namespace IMR.Areas.BO.Models
         public string TitleVi { get; set; }
         public string DescriptionVi { get; set; }
         public string ContentVi { get; set; }
-        public string RelatedArticleIds { get; set; }
+        public int ArticleCategoryId { get; set; }
+        public string IsMain { get; set; }
     }
 }

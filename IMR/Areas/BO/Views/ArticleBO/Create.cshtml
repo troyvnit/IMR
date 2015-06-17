@@ -1,9 +1,9 @@
 ﻿@model IMR.Areas.BO.Models.ArticleBO
-
 @{
     var submitButtonName = Model.ArticleId == 0 ? "Create" : "Update";
     ViewBag.Title = Model.ArticleId == 0 ? "Create New Article" : "Update Article #" + Model.ArticleId;
     Layout = "~/Areas/BO/Views/Shared/_Layout.cshtml";
+    var articleCategories = (IEnumerable<IMR.Areas.BO.Models.ArticleCategoryBO>)ViewBag.ArticleCategories;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -24,9 +24,88 @@
                 <input type="hidden" id="Avatar" name="Avatar" value="@Model.Avatar" />
             </div>
             <div class="form-group">
-                <label for="RelatedArticles">Related Articles</label>
-                <input type="text" class="form-control" id="RelatedArticleIds" name="RelatedArticleIds" data-value="@Model.RelatedArticleIds" placeholder="Related Articles">
+                <label for="ArticleCategoryId">Category</label>
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" name="IsMain" aria-label="main" @Model.IsMain />
+                    </span>
+                    <select class="form-control" id="ArticleCategoryId" name="ArticleCategoryId">
+                        @foreach (var articleCategory in articleCategories)
+                        {
+                            var selectedAttr = articleCategory.ArticleCategoryId == Model.ArticleCategoryId ? "selected" : "";
+                            <option value="@articleCategory.ArticleCategoryId" @selectedAttr>@articleCategory.Name</option>
+                        }
+                    </select>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#listCategoryModal">List</button>
+                    </span>
+                </div><!-- /input-group -->
+                <div class="modal fade" id="listCategoryModal" tabindex="-1" role="dialog" aria-labelledby="listCategoryModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">List of Article Categories</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    <a class="btn btn-primary" href="#" onclick="createNewArticleCategory(); return false;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New</a>
+                                </p>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Main Article Id
+                                        </th>
+                                        <th></th>
+                                    </tr>
+
+                                    @foreach (var item in articleCategories)
+                                    {
+                                        <tr>
+                                            <td class="col-md-1">
+                                                @item.ArticleCategoryId
+                                            </td>
+                                            <td class="col-md-5">
+                                                @item.Name
+                                            </td>
+                                            <td class="col-md-4">
+                                                @item.MainArticleId
+                                            </td>
+                                            <td class="col-md-2">
+                                                <a class="btn btn-info" href="#" onclick="editArticleCategory(this, @item.ArticleCategoryId, '@item.Name', @item.MainArticleId)"><span class=" glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                                <a class="btn btn-danger" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                    <tr id="newCategory" class="hide">
+                                        <td class="col-md-1">
+                                            <input type="number" class="form-control" name="ArticleCategoryId" placeholder="Article Category Id" readonly/>
+                                        </td>
+                                        <td class="col-md-5">
+                                            <input type="text" class="form-control" name="Name" placeholder="Name" />
+                                        </td>
+                                        <td class="col-md-4">
+                                            <input type="number" class="form-control" name="MainArticleId" placeholder="Main Article Id" />
+                                        </td>
+                                        <td class="col-md-2">
+                                            <a class="btn btn-info" href="#" onclick="saveArticleCategory()"><span class=" glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                                            <a class="btn btn-danger" href="#" onclick="cancelArticleCategory()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
         <div class="col-md-9">
             <div role="tabpanel">
@@ -100,74 +179,117 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(function () {
-            $("#AvatarFile").fileinput({
-                browseClass: "btn btn-success btn-block",
-                browseLabel: "&nbsp;Pick Image",
-                browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
-                showCaption: false,
-                showRemove: false,
-                showUpload: false,
-                initialPreview: [
-                    "<img src='/img/@Model.Avatar' class='file-preview-image' alt='@Model.Avatar' title='@Model.Avatar' style='width:100%;height:auto;'><div class='file-thumbnail-footer'><div class='file-caption-name' title='@Model.Avatar'>@Model.Avatar</div></div>"
-                ],
-                previewSettings: {
-                    image: { width: "100%", height: "auto" }
-                },
-                layoutTemplates: {
-                    footer: '<div class="file-thumbnail-footer">\n' +
-                            '    <div class="file-caption-name" style="width:auto">{caption}</div>\n' +
-                            '    {actions}\n' +
-                            '</div>'
-                }
-            });
-
-            tinymce.init({
-                selector: "textarea",
-                theme: "modern",
-                plugins: [
-                    "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-                    "searchreplace wordcount visualblocks visualchars code fullscreen",
-                    "insertdatetime media nonbreaking save table contextmenu directionality",
-                    "emoticons template paste textcolor colorpicker textpattern"
-                ],
-                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-                toolbar2: "print preview media | forecolor backcolor emoticons",
-                image_advtab: true,
-                templates: [
-                    { title: 'Test template 1', content: 'Test 1' },
-                    { title: 'Test template 2', content: 'Test 2' }
-                ],
-                init_instance_callback: function () {
-                    $.each(tinyMCE.editors, function (i, editor) {
-                        editor.setContent($('#' + editor.id).val());
-                    });
-                }
-            });
-
-            var articles = new Bloodhound({
-                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ArticleId'),
-                queryTokenizer: Bloodhound.tokenizers.whitespace,
-                remote: {
-                    url: '@Url.Action("GetArticles")' + '?query=%QUERY&ArticleId=' + '@Model.ArticleId'
-                }
-            });
-            articles.initialize();
-
-            $('#RelatedArticleIds').tagsinput({
-                itemValue: 'ArticleId',
-                itemText: 'Title',
-                typeaheadjs: {
-                    name: 'articles',
-                    displayKey: 'Title',
-                    source: articles.ttAdapter()
-                }
-            });
-
-            var relatedArticles = $.parseJSON($('#RelatedArticleIds').attr('data-value'));
-            $.each(relatedArticles, function (index, relatedArticle) {
-                $('#RelatedArticleIds').tagsinput('add', relatedArticle);
-            });
+    $(function () {
+        $("#AvatarFile").fileinput({
+            browseClass: "btn btn-success btn-block",
+            browseLabel: "&nbsp;Pick Image",
+            browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+            showCaption: false,
+            showRemove: false,
+            showUpload: false,
+            initialPreview: [
+                "<img src='/img/@Model.Avatar' class='file-preview-image' alt='@Model.Avatar' title='@Model.Avatar' style='width:100%;height:auto;'><div class='file-thumbnail-footer'><div class='file-caption-name' title='@Model.Avatar'>@Model.Avatar</div></div>"
+            ],
+            previewSettings: {
+                image: { width: "100%", height: "auto" }
+            },
+            layoutTemplates: {
+                footer: '<div class="file-thumbnail-footer">\n' +
+                        '    <div class="file-caption-name" style="width:auto">{caption}</div>\n' +
+                        '    {actions}\n' +
+                        '</div>'
+            }
         });
+
+        tinymce.init({
+            selector: "textarea",
+            theme: "modern",
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor colorpicker textpattern"
+            ],
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            toolbar2: "print preview media | forecolor backcolor emoticons",
+            image_advtab: true,
+            templates: [
+                { title: 'Test template 1', content: 'Test 1' },
+                { title: 'Test template 2', content: 'Test 2' }
+            ],
+            init_instance_callback: function () {
+                $.each(tinyMCE.editors, function (i, editor) {
+                    editor.setContent($('#' + editor.id).val());
+                });
+            }
+        });
+
+        var articles = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ArticleId'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: '@Url.Action("GetArticles")' + '?query=%QUERY&ArticleId=' + '@Model.ArticleId'
+            }
+        });
+        articles.initialize();
+
+        $('#RelatedArticleIds').tagsinput({
+            itemValue: 'ArticleId',
+            itemText: 'Title',
+            typeaheadjs: {
+                name: 'articles',
+                displayKey: 'Title',
+                source: articles.ttAdapter()
+            }
+        });
+
+        var relatedArticles = $.parseJSON($('#RelatedArticleIds').attr('data-value'));
+        $.each(relatedArticles, function (index, relatedArticle) {
+            $('#RelatedArticleIds').tagsinput('add', relatedArticle);
+        });
+    });
+    function createNewArticleCategory() {
+        $('#listCategoryModal .hide').removeClass('hide');
+        $('#listCategoryModal table tr').first().after($('#newCategory'));
+        $('#newCategory input[name="ArticleCategoryId"]').val(0);
+        $('#newCategory input[name="Name"]').val('');
+        $('#newCategory input[name="MainArticleId"]').val('');
+        $('#newCategory').removeClass('hide');
+    }
+    function editArticleCategory(row, articleCategoryId, name, mainArticleId) {
+        $('#listCategoryModal .hide').removeClass('hide');
+        $(row.closest('tr')).after($('#newCategory'));
+        $(row.closest('tr')).addClass('hide');
+        $('#newCategory input[name="ArticleCategoryId"]').val(articleCategoryId);
+        $('#newCategory input[name="Name"]').val(name);
+        $('#newCategory input[name="MainArticleId"]').val(mainArticleId);
+        $('#newCategory').removeClass('hide');
+    }
+    function cancelArticleCategory() {
+        $('#listCategoryModal .hide').removeClass('hide');
+        $('#newCategory').addClass('hide');
+    }
+    function saveArticleCategory() {
+        $.ajax({
+            method: 'POST',
+            url: '@Url.Action("CreateCategory")',
+                data: { ArticleCategoryId: $('#newCategory input[name="ArticleCategoryId"]').val(), Name: $('#newCategory input[name="Name"]').val(), MainArticleId: $('#newCategory input[name="MainArticleId"]').val() }
+            }).done(function (result) {
+                var template = '<tr><td class="col-md-1">' + result.ArticleCategoryId + '</td><td class="col-md-5">' + result.Name + '</td><td class="col-md-4">' + result.MainArticleId + '</td><td class="col-md-2"><a class="btn btn-info" href="#" onclick="editArticleCategory(this, ' + result.ArticleCategoryId + ', \'' + result.Name + '\', ' + result.MainArticleId + ')"><span class=" glyphicon glyphicon-edit" aria-hidden="true"></span></a><a class="btn btn-danger" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></tr>';
+                if ($('#listCategoryModal .hide').length == 0) {
+                    $('#listCategoryModal table tr').first().after(template);
+                } else {
+                    $('#listCategoryModal .hide').after(template);
+                    $('#listCategoryModal .hide').remove();
+                }
+                $('#newCategory').addClass('hide');
+                var options = $('#ArticleCategoryId option[value=' + result.ArticleCategoryId + ']');
+                if (options.length > 0) {
+                    options.text(result.Name);
+                } else {
+                    $('#ArticleCategoryId').append('<option value="' + result.ArticleCategoryId + '">' + result.Name + '</option>')
+                }
+            });
+        }
     </script>
 }

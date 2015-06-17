@@ -183,6 +183,7 @@
     <Compile Include="Areas\BO\Controllers\ArticleBOController.cs" />
     <Compile Include="Areas\BO\Controllers\SettingBOController.cs" />
     <Compile Include="Areas\BO\Models\ArticleBO.cs" />
+    <Compile Include="Areas\BO\Models\ArticleCategoryBO.cs" />
     <Compile Include="Areas\BO\Models\SettingBO.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Attributes\LocalizationAttribute.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\ArticleCategory.cs" />
     <Compile Include="Models\ArticleDetail.cs" />
     <Compile Include="Models\Enums\Language.cs" />
     <Compile Include="Models\Enums\SettingType.cs" />

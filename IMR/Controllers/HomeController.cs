@@ -23,7 +23,7 @@ namespace IMR.Controllers
 
         public ActionResult Article(string seoTitle)
         {
-            var article = db.Articles.Include(a => a.ArticleDetails).Include(a => a.RelatedArticles).FirstOrDefault(a => a.ArticleDetails.Count(ad => ad.SeoTitle == seoTitle) > 0);
+            var article = db.Articles.Include(a => a.ArticleDetails).FirstOrDefault(a => a.ArticleDetails.Count(ad => ad.SeoTitle == seoTitle) > 0);
             if (article == null)
             {
                 return HttpNotFound();

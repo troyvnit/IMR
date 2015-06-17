@@ -10,6 +10,7 @@ namespace IMR.Models
         public int ArticleId { get; set; }
         public string Avatar { get; set; }
         public ICollection<ArticleDetail> ArticleDetails { get; set; }
-        public ICollection<Article> RelatedArticles { get; set; }
+        public int ArticleCategoryId { get; set; }
+        public ArticleCategory ArticleCategory { get; set; }
     }
 }

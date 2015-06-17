@@ -32,6 +32,7 @@ namespace IMR.Mappers
 
             protected override void Configure()
             {
+                Mapper.CreateMap<ArticleCategoryBO, ArticleCategory>();
                 Mapper.CreateMap<ArticleBO, Article>();
                 Mapper.CreateMap<SettingBO, Setting>();
             }
@@ -46,6 +47,7 @@ namespace IMR.Mappers
 
             protected override void Configure()
             {
+                Mapper.CreateMap<ArticleCategory, ArticleCategoryBO>();
                 Mapper.CreateMap<Article, ArticleBO>()
                     .ForMember(a => a.IdEn, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.ArticleDetails.FirstOrDefault(a => a.Language == Language.En).ArticleDetailId : 0))
                     .ForMember(a => a.IdDe, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.ArticleDetails.FirstOrDefault(a => a.Language == Language.De).ArticleDetailId : 0))
@@ -58,12 +60,7 @@ namespace IMR.Mappers
                     .ForMember(a => a.DescriptionVi, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.ArticleDetails.FirstOrDefault(a => a.Language == Language.Vi).Description : string.Empty))
                     .ForMember(a => a.ContentEn, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.ArticleDetails.FirstOrDefault(a => a.Language == Language.En).Content : string.Empty))
                     .ForMember(a => a.ContentDe, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.ArticleDetails.FirstOrDefault(a => a.Language == Language.De).Content : string.Empty))
-                    .ForMember(a => a.ContentVi, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.ArticleDetails.FirstOrDefault(a => a.Language == Language.Vi).Content : string.Empty))
-                    .ForMember(a => a.RelatedArticleIds, o => o.ResolveUsing(x =>
-                    {
-                        var relatedArticles = x.RelatedArticles ?? new List<Article>();
-                        return JsonConvert.SerializeObject(x.RelatedArticles.Select(ra => new { ra.ArticleId, ra.ArticleDetails.FirstOrDefault(ad => ad.Language == Language.En).Title }));
-                    }));
+                    .ForMember(a => a.ContentVi, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.ArticleDetails.FirstOrDefault(a => a.Language == Language.Vi).Content : string.Empty));
                 Mapper.CreateMap<Setting, SettingBO>()
                     .ForMember(a => a.IdEn, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.En).SettingDetailId : 0))
                     .ForMember(a => a.IdDe, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.De).SettingDetailId : 0))
