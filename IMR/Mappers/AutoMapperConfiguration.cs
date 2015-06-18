@@ -47,7 +47,13 @@ namespace IMR.Mappers
 
             protected override void Configure()
             {
-                Mapper.CreateMap<ArticleCategory, ArticleCategoryBO>();
+                Mapper.CreateMap<ArticleCategory, ArticleCategoryBO>()
+                    .ForMember(a => a.CategoryIdEn, o => o.MapFrom(x => x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.En).ArticleCategoryDetailId : 0))
+                    .ForMember(a => a.CategoryIdDe, o => o.MapFrom(x => x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.De).ArticleCategoryDetailId : 0))
+                    .ForMember(a => a.CategoryIdVi, o => o.MapFrom(x => x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.Vi).ArticleCategoryDetailId : 0))
+                    .ForMember(a => a.NameEn, o => o.MapFrom(x => x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.En).Name : ""))
+                    .ForMember(a => a.NameDe, o => o.MapFrom(x => x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.De).Name : ""))
+                    .ForMember(a => a.NameVi, o => o.MapFrom(x => x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.ArticleCategoryDetails.FirstOrDefault(a => a.Language == Language.Vi).Name : ""));
                 Mapper.CreateMap<Article, ArticleBO>()
                     .ForMember(a => a.IdEn, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => a.Language == Language.En) != null ? x.ArticleDetails.FirstOrDefault(a => a.Language == Language.En).ArticleDetailId : 0))
                     .ForMember(a => a.IdDe, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.ArticleDetails.FirstOrDefault(a => a.Language == Language.De).ArticleDetailId : 0))
@@ -75,9 +81,12 @@ namespace IMR.Mappers
                     .ForMember(a => a.LinkDe, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.De) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.De).Link : string.Empty))
                     .ForMember(a => a.LinkVi, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi) != null ? x.SettingDetails.FirstOrDefault(a => a.Language == Language.Vi).Link : string.Empty));
                 Mapper.CreateMap<Article, ArticleVM>()
+                    .ForMember(a => a.SeoTitle, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).SeoTitle : ""))
                     .ForMember(a => a.Title, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Title : ""))
                     .ForMember(a => a.Description, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Description : ""))
                     .ForMember(a => a.Content, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Content : ""));
+                Mapper.CreateMap<ArticleCategory, ArticleCategoryVM>()
+                    .ForMember(a => a.Name, o => o.MapFrom(x => x.ArticleCategoryDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.ArticleCategoryDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Name : ""));
             }
         }
     }

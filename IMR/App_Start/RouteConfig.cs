@@ -15,15 +15,15 @@ namespace IMR
 
             routes.MapRoute(
                 name: "ArticleInternationalization",
-                url: "{culture}/a/{seoTitle}",
-                defaults: new { controller = "Home", action = "Article" },
+                url: "{culture}/a/{category}/{seoTitle}",
+                defaults: new { controller = "Home", action = "Article", seoTitle = UrlParameter.Optional },
                 constraints: new { culture = "[a-z]{2}" }
             );
 
             routes.MapRoute(
                 name: "Article",
-                url: "a/{seoTitle}",
-                defaults: new { controller = "Home", action = "Article" }
+                url: "a/{category}/{seoTitle}",
+                defaults: new { controller = "Home", action = "Article", seoTitle = UrlParameter.Optional }
             );
 
             routes.MapRoute(

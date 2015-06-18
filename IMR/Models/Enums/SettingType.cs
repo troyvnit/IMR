@@ -7,6 +7,6 @@ namespace IMR.Models.Enums
 {
     public enum SettingType
     {
-        Menu, HomePage_MainBox
+        Layout_Slogan, HomePage_MainBox
     }
 }

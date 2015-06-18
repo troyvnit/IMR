@@ -48,7 +48,7 @@ textarea {
     margin-bottom: 25px;
 }
 
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li.current > a{
     color: #e6e6e6;
     background-color: #646464;
 }
@@ -68,13 +68,13 @@ textarea {
 
 .language > li > a{
     vertical-align: middle;
-    color: #e6e6e6;
+    color: #646464;
     text-decoration: none;
     text-transform: uppercase;
 }
 
-.language > li > a:hover, .language > li > a:focus{
-    color: #646464;
+.language > li > a:hover, .language > li > a:focus, .language > li.current > a{
+    color: #e6e6e6;
     background-color: transparent;
 }
 
@@ -184,7 +184,7 @@ article .content{
 }
 
 .left-panel{
-      margin-top: 90px;
+      margin-top: 80px;
 }
 
 .left-panel .unternavigation{
@@ -206,8 +206,12 @@ article .content{
   background: url(/img/punkt_unternavigation.gif) no-repeat 0 3px;
 }
 
-.left-panel .unternavigation li a:hover{
+.left-panel .unternavigation li a:hover, .left-panel .unternavigation li.current a{
   background: url(/img/punkt_unternavigation_hover.gif) no-repeat 0 3px;
+}
+
+.left-panel .unternavigation li.current a {
+  color: #E6E6E6 !important;
 }
 
 .left-panel > img{

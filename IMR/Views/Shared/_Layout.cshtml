@@ -14,27 +14,7 @@
             <a href="/"><img class="logo" src="~/img/logo_IMR.gif" alt=""></a>
             <p>»The scanning of documents and management of accounts payable are cost-intensive processes. The full range of services provided by IMR in digitisation and archiving releases potential savings and economies of significant proportions.«</p>
         </div>
-        <div class="navbar navbar-default menu">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                <ul class="language pull-right">
-                    <li>@Html.ActionLink("En", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" }) | </li>
-                    <li>@Html.ActionLink("De", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) | </li>
-                    <li>@Html.ActionLink("Vi", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                </ul>
-            </div>
-        </div>
+        @{Html.RenderAction("_Menu", "Home");}
     </div>
     <div class="container body-content">
         @RenderBody()

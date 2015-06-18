@@ -199,6 +199,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleCategory.cs" />
+    <Compile Include="Models\ArticleCategoryDetail.cs" />
     <Compile Include="Models\ArticleDetail.cs" />
     <Compile Include="Models\Enums\Language.cs" />
     <Compile Include="Models\Enums\SettingType.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\SeoFactory.cs" />
+    <Compile Include="ViewModels\ArticleCategoryVM.cs" />
     <Compile Include="ViewModels\ArticleVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +387,7 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Views\Home\Article.cshtml" />
+    <Content Include="Views\Home\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

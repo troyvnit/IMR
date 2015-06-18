@@ -16,6 +16,7 @@ namespace IMR.DAL
         }
 
         public DbSet<ArticleCategory> ArticleCategories { get; set; }
+        public DbSet<ArticleCategoryDetail> ArticleCategoryDetails { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticleDetail> ArticleDetails { get; set; }
         public DbSet<Setting> Settings { get; set; }

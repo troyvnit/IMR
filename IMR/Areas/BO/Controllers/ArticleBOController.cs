@@ -29,13 +29,13 @@ namespace IMR.Areas.BO.Controllers
         // GET: BO/ArticleBO/Create
         public ActionResult Create(int? id)
         {
-            var articleCategories = db.ArticleCategories.ToList();
+            var articleCategories = db.ArticleCategories.Include(ac => ac.ArticleCategoryDetails).ToList();
             ViewBag.ArticleCategories = articleCategories.Select(ac => Mapper.Map<ArticleCategoryBO>(ac));
             if (id == null)
             {
                 return View(new ArticleBO { Avatar = "no-avatar.jpg" });
             }
-            Article article = db.Articles.Include(a => a.ArticleDetails).FirstOrDefault(a => a.ArticleId == id);
+            Article article = db.Articles.Include(a => a.ArticleDetails).Include(a => a.ArticleCategory).FirstOrDefault(a => a.ArticleId == id);
             if (article == null)
             {
                 return HttpNotFound();
@@ -53,47 +53,41 @@ namespace IMR.Areas.BO.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ArticleBO articleBO, HttpPostedFileBase AvatarFile)
         {
-            if (ModelState.IsValid)
-            {
-                var article = Mapper.Map<Article>(articleBO);
-                article.ArticleDetails = new List<ArticleDetail> { 
+            var article = Mapper.Map<Article>(articleBO);
+            article.ArticleDetails = new List<ArticleDetail> { 
                     new ArticleDetail { ArticleId = articleBO.ArticleId, ArticleDetailId = articleBO.IdEn, Language = Language.En, SeoTitle = articleBO.TitleEn.GenerateSeoTitle(), Title = articleBO.TitleEn, Description = articleBO.DescriptionEn, Content = articleBO.ContentEn }, 
                     new ArticleDetail { ArticleId = articleBO.ArticleId, ArticleDetailId = articleBO.IdDe, Language = Language.De, SeoTitle = articleBO.TitleDe.GenerateSeoTitle(), Title = articleBO.TitleDe, Description = articleBO.DescriptionDe, Content = articleBO.ContentDe }, 
                     new ArticleDetail { ArticleId = articleBO.ArticleId, ArticleDetailId = articleBO.IdVi, Language = Language.Vi, SeoTitle = articleBO.TitleVi.GenerateSeoTitle(), Title = articleBO.TitleVi, Description = articleBO.DescriptionVi, Content = articleBO.ContentVi }
                 };
-                if (AvatarFile != null && AvatarFile.ContentLength > 0)
-                {
-                    string path = "~/img/" + AvatarFile.FileName;
-                    AvatarFile.SaveAs(Server.MapPath(path));
-                    article.Avatar = AvatarFile.FileName;
-                }
-                var articleCategory = db.ArticleCategories.Include(ac => ac.Articles).FirstOrDefault(ac => ac.ArticleCategoryId == articleBO.ArticleCategoryId);
-                if (articleCategory != null)
-                {
-                    article.ArticleCategoryId = articleCategory.ArticleCategoryId;
-                    article.ArticleCategory = articleCategory;
-                }
-                if (article.ArticleId != 0)
-                {
-                    db.Entry(article).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                else
-                {
-                    db.Articles.Add(article);
-                    db.SaveChanges();
-                }
-                if (articleBO.IsMain == "on")
-                {
-                    articleCategory.MainArticleId = article.ArticleId;
-                    articleCategory.MainArticle = article;
-                    db.Entry(articleCategory).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                return RedirectToAction("Index");
+            if (AvatarFile != null && AvatarFile.ContentLength > 0)
+            {
+                string path = "~/img/" + AvatarFile.FileName;
+                AvatarFile.SaveAs(Server.MapPath(path));
+                article.Avatar = AvatarFile.FileName;
             }
-
-            return View(articleBO);
+            var articleCategory = db.ArticleCategories.FirstOrDefault(ac => ac.ArticleCategoryId == articleBO.ArticleCategoryId);
+            if (articleCategory != null)
+            {
+                article.ArticleCategoryId = articleCategory.ArticleCategoryId;
+                article.ArticleCategory = articleCategory;
+            }
+            if (article.ArticleId != 0)
+            {
+                db.Entry(article).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Articles.Add(article);
+                db.SaveChanges();
+            }
+            if (articleBO.IsMain == "on")
+            {
+                articleCategory.MainArticleId = article.ArticleId;
+                db.Entry(articleCategory).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: BO/ArticleBO/Delete/5
@@ -132,6 +126,11 @@ namespace IMR.Areas.BO.Controllers
 
         public ActionResult CreateCategory(ArticleCategoryBO articleCategoryBO){
             var articleCategory = Mapper.Map<ArticleCategory>(articleCategoryBO);
+            articleCategory.ArticleCategoryDetails = new List<ArticleCategoryDetail> { 
+                    new ArticleCategoryDetail { ArticleCategoryId = articleCategoryBO.ArticleCategoryId, ArticleCategoryDetailId = articleCategoryBO.CategoryIdEn, Language = Language.En, Name = articleCategoryBO.NameEn }, 
+                    new ArticleCategoryDetail { ArticleCategoryId = articleCategoryBO.ArticleCategoryId, ArticleCategoryDetailId = articleCategoryBO.CategoryIdDe, Language = Language.De, Name = articleCategoryBO.NameDe }, 
+                    new ArticleCategoryDetail { ArticleCategoryId = articleCategoryBO.ArticleCategoryId, ArticleCategoryDetailId = articleCategoryBO.CategoryIdVi, Language = Language.Vi, Name = articleCategoryBO.NameVi }
+                };
             if (articleCategory.ArticleCategoryId != 0)
             {
                 db.Entry(articleCategory).State = EntityState.Modified;

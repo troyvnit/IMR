@@ -8,9 +8,8 @@ namespace IMR.Models
     public class ArticleCategory
     {
         public int ArticleCategoryId { get; set; }
-        public string Name { get; set; }
+        public ICollection<ArticleCategoryDetail> ArticleCategoryDetails { get; set; }
         public ICollection<Article> Articles { get; set; }
         public int MainArticleId { get; set; }
-        public Article MainArticle { get; set; }
     }
 }

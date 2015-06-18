@@ -1,11 +1,19 @@
 ﻿@model IMR.ViewModels.ArticleVM
+@using System.Threading;
 @{
     ViewBag.Title = "Article";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var sameCategoryArticles = (List<IMR.ViewModels.ArticleVM>)ViewBag.SameCategoryArticles;
 }
 <div class="row">
     <div class="col-sm-3 left-panel">
-        <ul class="unternavigation"><li><a href="en/services/accounts-payable-management.html">Accounts payable management</a></li><li><a href="en/services/digital-mail-processing.html">Digital mail processing</a></li><li><a href="en/services/contract-documents.html">Contract documents</a></li><li><a href="en/services/building-records.html">Building records</a></li><li><a href="en/services/drawings-and-plans.html">Drawings and plans</a></li><li><a href="en/services/data-entry.html">Data entry</a></li><li><a href="en/services/billing-data-entry.html">Billing data entry</a></li><li><a href="en/services/archiving-system.html">Archiving system</a></li><li><a href="en/services/better-to-be-safe-than-sorry.html">Better to be safe than sorry</a></li></ul>
+        <ul class="unternavigation">
+            @foreach (var sameCategoryArticle in sameCategoryArticles)
+            {
+                var currentClass = sameCategoryArticle.ArticleId == Model.ArticleId ? "current" : "";
+                <li class="@currentClass"><a href="/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/a/@ViewBag.CategoryName/@sameCategoryArticle.SeoTitle">@sameCategoryArticle.Title</a></li>
+            }
+        </ul>
         <img src="~/img/@Model.Avatar" />
         <div class="address">
             <strong>IMR Image-Management GmbH</strong>
@@ -25,6 +33,7 @@
             </a>
         </div>
     </div>
+
     <article class="col-sm-9">
         <h2>@Model.Title</h2>
         <span class="description">@Html.Raw(Model.Description)</span>

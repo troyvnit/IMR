@@ -1,0 +1,32 @@
+﻿@model IEnumerable<IMR.ViewModels.ArticleCategoryVM>
+@using System.Threading;
+@{
+    var currentUrl = Request.Url.AbsoluteUri;
+    var homeClass = Request.Url.AbsolutePath == "/" || Request.Url.AbsolutePath == "/" + Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2) ? "current" : "";
+}
+<div class="navbar navbar-default menu">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li class="@homeClass">@Html.ActionLink("Home", "Index", "Home")</li>
+            @foreach (var category in Model)
+            {
+                var url = "/" + Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2) + "/a/" + category.Name.ToLower();
+                var currentClass = currentUrl.Contains(url) ? "current" : "";
+                <li class="@currentClass"><a href="@url">@category.Name</a></li>
+            }
+        </ul>
+        <ul class="language pull-right">
+            <li class="@(Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2) == "en" ? "current" : "")"><a href="@ViewBag.EnUrl">En</a> | </li>
+            <li class="@(Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2) == "de" ? "current" : "")"><a href="@ViewBag.DeUrl">De</a> | </li>
+            <li class="@(Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2) == "vi" ? "current" : "")"><a href="@ViewBag.ViUrl">Vi</a></li>
+        </ul>
+    </div>
+
+</div>
