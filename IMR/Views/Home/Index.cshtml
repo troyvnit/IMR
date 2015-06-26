@@ -1,5 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = Resources.IMRResources.Home;
+    var mainBoxSettings = (IEnumerable<IMR.ViewModels.SettingVM>)ViewBag.MainBoxSettings;
 }
 
 <div class="jumbotron">
@@ -7,24 +8,13 @@
 </div>
 
 <div class="row main-box">
-    <div class="col-md-4">
-        <h3>THE COMPANY</h3>
-        <img src="http://www.imrgmbh.de/uploads/tx_templavoila/icon_unternehmen_01.gif" width="75" height="52" border="0" alt="">
-        <p>
-            IMR Image-Management GmbH  is a professional full-service provider for accounts payable management, document management and scanning services. Specialising in accounts payable processes, we tailor our solutions to organisational requirements in companies to fit in with their operational procedures in sales, bookkeeping and accounts in the best possible way. IMR operates with maximum data security and process efficiency to facilitate the rapid and reliable flow of information in the company. And its services are excellent value for money.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">More &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h3>OUR SERVICES</h3>
-        <img src="http://www.imrgmbh.de/uploads/tx_templavoila/icon_leistungen_01.gif" width="75" height="52" border="0" alt="">
-        <p>IMR offers the full range of automated document capture and processing services. The main focus is on the digital capture and provision of data as required as well as the flexibility to adapt and incorporate the data in existing business processes. The service is not only for German documents. We also process bills, receipts and documents from all the West European countries in the respective national languages. For our customers there is no need to invest in additional hardware or data capture software.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">More &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h3>OUR SECTORS</h3>
-        <img src="http://www.imrgmbh.de/uploads/tx_templavoila/icon_branchen_01.gif" width="75" height="52" border="0" alt="">
-        <p>Every sector has its specific requirements and needs expert acquaintance with the business and exact knowledge of the target market. We talk to our customers and share professional insights for mutual benefit. This constant dialogue and our many years of experience in projects in a wide and diverse range of sectors enable us to tailor our services to the realities of the business in the best possible way in any given case and to cater to the specific requirements of the company or department.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">More &raquo;</a></p>
-    </div>
+    @foreach (var mainBoxSetting in mainBoxSettings)
+    {
+        <div class="col-md-4">
+            <h3>@mainBoxSetting.Name</h3>
+            <img src="~/img/@mainBoxSetting.Avatar" width="75" height="52" border="0" alt="">
+            @Html.Raw(mainBoxSetting.Description)
+            <p><a class="btn btn-default" href="@mainBoxSetting.Link">More &raquo;</a></p>
+        </div>
+    }
 </div>

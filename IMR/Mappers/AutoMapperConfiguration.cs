@@ -87,6 +87,10 @@ namespace IMR.Mappers
                     .ForMember(a => a.Content, o => o.MapFrom(x => x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.ArticleDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Content : ""));
                 Mapper.CreateMap<ArticleCategory, ArticleCategoryVM>()
                     .ForMember(a => a.Name, o => o.MapFrom(x => x.ArticleCategoryDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.ArticleCategoryDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Name : ""));
+                Mapper.CreateMap<Setting, SettingVM>()
+                    .ForMember(a => a.Name, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Name : ""))
+                    .ForMember(a => a.Link, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Link : ""))
+                    .ForMember(a => a.Description, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Description : ""));
             }
         }
     }

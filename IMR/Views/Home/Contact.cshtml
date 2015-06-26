@@ -1,17 +1,30 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@using System.Threading;
+@{
+    ViewBag.Title = Resources.IMRResources.Contact;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="row">
+    <div class="col-sm-3 left-panel">
+        <ul class="unternavigation">
+            <li class="current"><a href="/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/@Resources.IMRResources.Contact">@Resources.IMRResources.Contact</a></li>
+            <li><a href="/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/@Resources.IMRResources.Disclaimer">@Resources.IMRResources.Disclaimer</a></li>
+        </ul>
+        <div class="address">
+            <strong>IMR Image-Management GmbH</strong>
+            <br>
+            Neue Weilheimer Straße 14
+            <br>
+            73230 Kirchheim u. Teck
+            <br><br>
+            Tel.: 07021 485078
+            <br>
+            Fax.:  07021 83411
+        </div>
+    </div>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+    <article class="col-sm-9">
+        <h2>@Resources.IMRResources.Contact_Title</h2>
+        <span class="description">@Resources.IMRResources.Contact_Description</span>
+    </article>
+</div>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>

@@ -14,7 +14,7 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li class="@homeClass">@Html.ActionLink("Home", "Index", "Home")</li>
+            <li class="@homeClass">@Html.ActionLink(Resources.IMRResources.Home, "Index", "Home")</li>
             @foreach (var category in Model)
             {
                 var url = "/" + Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2) + "/a/" + category.Name.ToLower();

@@ -61,11 +61,47 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vi.
+        ///   Looks up a localized string similar to Liên hệ.
         /// </summary>
-        internal static string Troy {
+        internal static string Contact {
             get {
-                return ResourceManager.GetString("Troy", resourceCulture);
+                return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chúng tôi đánh giá cao câu hỏi của bạn và đánh giá cao đề xuất của bạn. Chúng tôi sẽ liên lạc với bạn nhanh nhất có thể..
+        /// </summary>
+        internal static string Contact_Description {
+            get {
+                return ResourceManager.GetString("Contact_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Liên hệ IMR.
+        /// </summary>
+        internal static string Contact_Title {
+            get {
+                return ResourceManager.GetString("Contact_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trách nhiệm.
+        /// </summary>
+        internal static string Disclaimer {
+            get {
+                return ResourceManager.GetString("Disclaimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trang chủ.
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
             }
         }
     }

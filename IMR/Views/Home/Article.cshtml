@@ -1,7 +1,7 @@
 ﻿@model IMR.ViewModels.ArticleVM
 @using System.Threading;
 @{
-    ViewBag.Title = "Article";
+    ViewBag.Title = Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
     var sameCategoryArticles = (List<IMR.ViewModels.ArticleVM>)ViewBag.SameCategoryArticles;
 }

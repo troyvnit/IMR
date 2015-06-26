@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,6 +20,8 @@ namespace IMR.Controllers
         private IMRContext db = new IMRContext();
         public ActionResult Index()
         {
+            var mainBoxSettings = db.SettingDetails.Where(sd => sd.Setting.SettingType == SettingType.HomePage_MainBox && Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(sd.Language.ToString().ToLower())).ToList();
+            ViewBag.MainBoxSettings = mainBoxSettings.Select(Mapper.Map<SettingVM>);
             return View();
         }
 
@@ -56,11 +60,25 @@ namespace IMR.Controllers
                 deUrl += "/" + article.ArticleDetails.FirstOrDefault(a => a.Language == Language.De).SeoTitle;
                 viUrl += "/" + article.ArticleDetails.FirstOrDefault(a => a.Language == Language.Vi).SeoTitle; 
             }
+            var contact = Request.RequestContext.RouteData.Values["contact"];
+            if (contact != null)
+            {
+                enUrl += "/" + Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("en"));
+                deUrl += "/" + Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("de"));
+                viUrl += "/" + Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("vi")); 
+            }
             ViewBag.EnUrl = enUrl;
             ViewBag.DeUrl = deUrl;
             ViewBag.ViUrl = viUrl; 
             var articleCategories = db.ArticleCategories.Include(ac => ac.ArticleCategoryDetails).ToList();
             return PartialView(articleCategories.Select(Mapper.Map<ArticleCategoryVM>).ToList());
+        }
+
+        public ActionResult _Header()
+        {
+            var sloganSetting = db.SettingDetails.FirstOrDefault(sd => sd.Setting.SettingType == SettingType.Layout_Header_Slogan && Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(sd.Language.ToString().ToLower()));
+            ViewBag.Slogan = sloganSetting != null ? sloganSetting.Description : "";
+            return PartialView();
         }
 
         public ActionResult About()
@@ -72,8 +90,6 @@ namespace IMR.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

@@ -191,6 +191,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\IMRContext.cs" />
+    <Compile Include="DAL\IMRInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,6 +214,7 @@
     <Compile Include="Utils\SeoFactory.cs" />
     <Compile Include="ViewModels\ArticleCategoryVM.cs" />
     <Compile Include="ViewModels\ArticleVM.cs" />
+    <Compile Include="ViewModels\SettingVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-tagsinput.css" />
@@ -388,6 +390,7 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Views\Home\Article.cshtml" />
     <Content Include="Views\Home\_Menu.cshtml" />
+    <Content Include="Views\Home\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

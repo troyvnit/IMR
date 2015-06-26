@@ -26,8 +26,10 @@
             <div class="form-group">
                 <label for="SettingType">SettingType</label>
                 <select class="form-control" id="SettingType" name="SettingType" data-value="@Model.SettingType">
-                    <option value="Menu">Menu</option>
-                    <option value="HomePage_MainBox">Home Page Main Box</option>
+                    @foreach (var settingType in Enum.GetNames(typeof(IMR.Models.Enums.SettingType)))
+                    {
+                        <option value="@settingType">@settingType</option>
+                    }
                 </select>
             </div>
         </div>
@@ -50,12 +52,12 @@
                             <input type="text" class="form-control" id="NameEn" name="NameEn" value="@Model.NameEn" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <label for="DescriptionEn">Description</label>
-                            <input type="text" class="form-control" id="DescriptionEn" name="DescriptionEn" value="@Model.DescriptionEn" placeholder="Description">
-                        </div>
-                        <div class="form-group">
                             <label for="LinkEn">Link</label>
                             <input type="text" class="form-control" id="LinkEn" name="LinkEn" value="@Model.LinkEn" placeholder="Link">
+                        </div>
+                        <div class="form-group">
+                            <label for="DescriptionEn">Description</label>
+                            <textarea class="form-control" id="DescriptionEn" name="DescriptionEn" placeholder="Description" rows="4">@Model.DescriptionEn</textarea>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="de">
@@ -65,12 +67,12 @@
                             <input type="text" class="form-control" id="NameDe" name="NameDe" value="@Model.NameDe" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <label for="DescriptionDe">Description</label>
-                            <input type="text" class="form-control" id="DescriptionDe" name="DescriptionDe" value="@Model.DescriptionDe" placeholder="Description">
-                        </div>
-                        <div class="form-group">
                             <label for="LinkDe">Link</label>
                             <input type="text" class="form-control" id="LinkDe" name="LinkDe" value="@Model.LinkDe" placeholder="Link">
+                        </div>
+                        <div class="form-group">
+                            <label for="DescriptionDe">Description</label>
+                            <textarea class="form-control" id="DescriptionDe" name="DescriptionDe" placeholder="Description" rows="4">@Model.DescriptionDe</textarea>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="vi">
@@ -81,7 +83,7 @@
                         </div>
                         <div class="form-group">
                             <label for="DescriptionVi">Description</label>
-                            <input type="text" class="form-control" id="DescriptionVi" name="DescriptionVi" value="@Model.DescriptionVi" placeholder="Description">
+                            <textarea class="form-control" id="DescriptionVi" name="DescriptionVi" placeholder="Description" rows="4">@Model.DescriptionVi</textarea>
                         </div>
                         <div class="form-group">
                             <label for="LinkVi">Link</label>
@@ -122,6 +124,29 @@
                             '    <div class="file-caption-name" style="width:auto">{caption}</div>\n' +
                             '    {actions}\n' +
                             '</div>'
+                }
+            });
+
+            tinymce.init({
+                selector: "textarea",
+                theme: "modern",
+                plugins: [
+                    "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                    "searchreplace wordcount visualblocks visualchars code fullscreen",
+                    "insertdatetime media nonbreaking save table contextmenu directionality",
+                    "emoticons template paste textcolor colorpicker textpattern"
+                ],
+                toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                toolbar2: "print preview media | forecolor backcolor emoticons",
+                image_advtab: true,
+                templates: [
+                    { title: 'Test template 1', content: 'Test 1' },
+                    { title: 'Test template 2', content: 'Test 2' }
+                ],
+                init_instance_callback: function () {
+                    $.each(tinyMCE.editors, function (i, editor) {
+                        editor.setContent($('#' + editor.id).val());
+                    });
                 }
             });
 

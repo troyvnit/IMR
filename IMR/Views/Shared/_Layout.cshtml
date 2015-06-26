@@ -10,10 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="header row">
-            <a href="/"><img class="logo" src="~/img/logo_IMR.gif" alt=""></a>
-            <p>»The scanning of documents and management of accounts payable are cost-intensive processes. The full range of services provided by IMR in digitisation and archiving releases potential savings and economies of significant proportions.«</p>
-        </div>
+        @{Html.RenderAction("_Header", "Home");}
         @{Html.RenderAction("_Menu", "Home");}
     </div>
     <div class="container body-content">
@@ -22,7 +19,7 @@
             <div class="tuev-logo"><a href="http://www.imrgmbh.de/en/quality.html"><img src="~/img/tuev_logo.jpg" alt=""></a></div>
             <p>&copy; @DateTime.Now.Year, IMR GmbH</p>
             <ul>
-                <li><a href="en/contact.html">Contact</a>&nbsp;|&nbsp;</li>
+                <li><a href="/@System.Threading.Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/@Resources.IMRResources.Contact">@Resources.IMRResources.Contact</a>&nbsp;|&nbsp;</li>
                 <li><a href="en/disclaimer.html">Disclaimer</a></li>
             </ul>
         </footer>

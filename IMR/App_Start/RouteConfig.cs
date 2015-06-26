@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +13,13 @@ namespace IMR
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                name:"Contact",
+                url: "{culture}/{contact}",
+                defaults: new { controller = "Home", action = "Contact", culture = UrlParameter.Optional },
+                constraints: new { contact = new ContactConstraint() }
+            );
 
             routes.MapRoute(
                 name: "ArticleInternationalization",
@@ -40,4 +48,14 @@ namespace IMR
             );
         }
     }
+
+    public class ContactConstraint : IRouteConstraint
+    {
+        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+        {
+            return values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("en")), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("de")), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("vi")), StringComparison.OrdinalIgnoreCase); 
+        }
+    } 
 }
