@@ -1,4 +1,5 @@
 ﻿@using System.Threading;
+@model IMR.ViewModels.ContactVM
 @{
     ViewBag.Title = Resources.IMRResources.Contact;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,7 +25,118 @@
 
     <article class="col-sm-9">
         <h2>@Resources.IMRResources.Contact_Title</h2>
-        <span class="description">@Resources.IMRResources.Contact_Description</span>
+        @if (Model == null)
+        {
+            <span class="description">@Resources.IMRResources.Contact_Description</span>
+            <form class="form-horizontal" id="contactForm" method="post">
+                <fieldset class="col-sm-10">
+                    <div class="form-group">
+                        <label for="contactPerson" class="col-sm-3 col-sm-offset-1 control-label">Contact person*</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="contactPerson" name="ContactPerson" placeholder="Contact Person" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="firm" class="col-sm-3 col-sm-offset-1 control-label">Firm</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="firm" name="Firm" placeholder="Firm">
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-sm-10">
+                    <div class="form-group">
+                        <label for="street" class="col-sm-3 col-sm-offset-1 control-label">Street</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="street" name="Street" placeholder="Street">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="postcode" class="col-sm-3 col-sm-offset-1 control-label">Postcode</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="postcode" name="Postcode" placeholder="Postcode">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="town" class="col-sm-3 col-sm-offset-1 control-label">Town</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="town" name="Town" placeholder="Town">
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-sm-10">
+                    <div class="form-group">
+                        <label for="telephoneNumber" class="col-sm-3 col-sm-offset-1 control-label">Telephone number</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="telephoneNumber" name="TelephoneNumber" placeholder="Telephone number">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddress" class="col-sm-3 col-sm-offset-1 control-label">Email Address*</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="emailAddress" name="EmailAddress" placeholder="Email Address" required>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-sm-10">
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="freeTrial" name="FreeTrial"> Free trial
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="callback" name="Callback"> Callback
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-sm-10">
+                    <div class="form-group">
+                        <label for="subject" class="col-sm-3 col-sm-offset-1 control-label">Subject</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="subject" name="Subject">
+                                <option value="">Your choice</option>
+                                <option value="Invoice data entry">Invoice data entry</option>
+                                <option value="Archive scanning">Archive scanning</option>
+                                <option value="Drawing scanning">Drawing scanning</option>
+                                <option value="Data acquisition">Data acquisition</option>
+                                <option value="Microfilm aperture card scanning">Microfilm aperture card scanning</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="col-sm-3 col-sm-offset-1 control-label">Your message</label>
+                        <div class="col-sm-8">
+                            <textarea rows="4" class="form-control" id="message" name="Message" placeholder="Your message"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <button type="submit" class="btn btn-default pull-right">Absenden</button>
+                    </div>
+                </div>
+            </form>
+        }
+        else
+        {
+            <span class="description">@Html.Raw(Resources.IMRResources.Contact_Thanks)</span>
+        }
+
     </article>
 </div>
+
+
+
+
+
+
 

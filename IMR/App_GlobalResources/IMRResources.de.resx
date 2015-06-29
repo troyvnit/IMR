@@ -123,6 +123,10 @@
   <data name="Contact_Description" xml:space="preserve">
     <value>Ihre Fragen und Anregungen sind uns wichtig. Wir setzen uns umgehend mit Ihnen in Verbindung.</value>
   </data>
+  <data name="Contact_Thanks" xml:space="preserve">
+    <value>&lt;p&gt;Ihre Fragen und Anregungen sind uns wichtig. Wir setzen uns umgehend mit Ihnen in Verbindung.&lt;/p&gt;
+&lt;p&gt;Vielen Dank für Ihre Anfrage.&lt;/p&gt;</value>
+  </data>
   <data name="Contact_Title" xml:space="preserve">
     <value>Ihr direkter Draht zu IMR</value>
   </data>

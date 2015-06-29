@@ -9,7 +9,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -91,6 +94,40 @@ namespace IMR.Controllers
         public ActionResult Contact()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Contact(ContactVM contactForm)
+        {
+            var body = "<p>Email From: {0} ({1})</p>{3}{4}{5}{6}{7}{8}{9}<p>Message:</p><p>{2}</p>";
+            var firm = !string.IsNullOrEmpty(contactForm.Firm) ? "<p>Firm:</p><p>" + contactForm.Firm + "</p>" : "";
+            var street = !string.IsNullOrEmpty(contactForm.Street) ? "<p>Street:</p><p>" + contactForm.Street + "</p>" : "";
+            var postcode = !string.IsNullOrEmpty(contactForm.Postcode) ? "<p>Postcode:</p><p>" + contactForm.Postcode + "</p>" : "";
+            var town = !string.IsNullOrEmpty(contactForm.Town) ? "<p>Town:</p><p>" + contactForm.Town + "</p>" : "";
+            var telephoneNumber = !string.IsNullOrEmpty(contactForm.TelephoneNumber) ? "<p>Telephone Number:</p><p>" + contactForm.TelephoneNumber + "</p>" : "";
+            var freeTrial = "<p>Free trial:</p><p>" + (contactForm.FreeTrial ? "Yes" : "No") + "</p>";
+            var callback = "<p>Callback:</p><p>" + (contactForm.Callback ? "Yes" : "No") + "</p>";
+            var message = new MailMessage();
+            message.To.Add(new MailAddress("troyuit@gmail.com"));  
+            message.From = new MailAddress(contactForm.EmailAddress);  
+            message.Subject = contactForm.Subject;
+            message.Body = string.Format(body, contactForm.ContactPerson, contactForm.EmailAddress, contactForm.Message, firm, street, postcode, town, telephoneNumber, freeTrial, callback);
+            message.IsBodyHtml = true;
+
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "troyuit@gmail.com",  
+                    Password = "triphuong18092008"  
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                await smtp.SendMailAsync(message);
+                return View(contactForm);
+            }
         }
     }
 }

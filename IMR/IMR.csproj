@@ -214,6 +214,7 @@
     <Compile Include="Utils\SeoFactory.cs" />
     <Compile Include="ViewModels\ArticleCategoryVM.cs" />
     <Compile Include="ViewModels\ArticleVM.cs" />
+    <Compile Include="ViewModels\ContactVM.cs" />
     <Compile Include="ViewModels\SettingVM.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cảm ơn.
+        /// </summary>
+        internal static string Contact_Thanks {
+            get {
+                return ResourceManager.GetString("Contact_Thanks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Liên hệ IMR.
         /// </summary>
         internal static string Contact_Title {
