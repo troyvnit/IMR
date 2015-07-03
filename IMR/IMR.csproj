@@ -259,6 +259,7 @@
     </Content>
     <Content Include="Areas\BO\Views\SettingBO\Index.cshtml" />
     <Content Include="Areas\BO\Views\SettingBO\Create.cshtml" />
+    <None Include="Properties\PublishProfiles\IMR.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\fileinput.js" />
     <Content Include="Scripts\fileinput.min.js" />
