@@ -1,0 +1,26 @@
+﻿@using System.Threading;
+@model IMR.ViewModels.SettingDetailVM
+@{
+    ViewBag.Title = Resources.IMRResources.Disclaimer;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-3 left-panel">
+        <ul class="unternavigation">
+            <li><a href="/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/@Resources.IMRResources.Contact">@Resources.IMRResources.Contact</a></li>
+            <li class="current"><a href="/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/@Resources.IMRResources.Disclaimer">@Resources.IMRResources.Disclaimer</a></li>
+        </ul>
+        @if (!string.IsNullOrEmpty(Model.Avatar))
+        {
+            <img src="~/img/@Model.Avatar" />
+        }
+        @{Html.RenderAction("_Address", "Home");}
+        @{Html.RenderPartial("_Contact");}
+    </div>
+
+    <article class="col-sm-9">
+        <h2>@Model.Name</h2>
+        <span class="content">@Html.Raw(Model.Description)</span>
+    </article>
+</div>
+

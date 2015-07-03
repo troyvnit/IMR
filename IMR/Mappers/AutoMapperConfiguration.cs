@@ -91,6 +91,8 @@ namespace IMR.Mappers
                     .ForMember(a => a.Name, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Name : ""))
                     .ForMember(a => a.Link, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Link : ""))
                     .ForMember(a => a.Description, o => o.MapFrom(x => x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())) != null ? x.SettingDetails.FirstOrDefault(a => Thread.CurrentThread.CurrentUICulture.Name.ToLower().Contains(a.Language.ToString().ToLower())).Description : ""));
+                Mapper.CreateMap<SettingDetail, SettingDetailVM>()
+                    .ForMember(a => a.Avatar, o => o.MapFrom(x => x.Setting.Avatar));
             }
         }
     }

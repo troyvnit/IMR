@@ -120,8 +120,56 @@
   <data name="Contact" xml:space="preserve">
     <value>Kontakt</value>
   </data>
+  <data name="Contact_Callback" xml:space="preserve">
+    <value>Rückruf erwünscht</value>
+  </data>
+  <data name="Contact_ContactPerson" xml:space="preserve">
+    <value>Ansprechpartner</value>
+  </data>
   <data name="Contact_Description" xml:space="preserve">
     <value>Ihre Fragen und Anregungen sind uns wichtig. Wir setzen uns umgehend mit Ihnen in Verbindung.</value>
+  </data>
+  <data name="Contact_EmailAddress" xml:space="preserve">
+    <value>E-Mail adresse</value>
+  </data>
+  <data name="Contact_Firm" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="Contact_FreeTrial" xml:space="preserve">
+    <value>Kostenfreier Test</value>
+  </data>
+  <data name="Contact_Message" xml:space="preserve">
+    <value>Ihre Nachricht</value>
+  </data>
+  <data name="Contact_Please" xml:space="preserve">
+    <value>Nehmen Sie Kontakt zu uns auf über unser Kontaktformular.</value>
+  </data>
+  <data name="Contact_Postcode" xml:space="preserve">
+    <value>Plz</value>
+  </data>
+  <data name="Contact_Street" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="Contact_Subject" xml:space="preserve">
+    <value>Thema</value>
+  </data>
+  <data name="Contact_Subject_ArchiveScanning" xml:space="preserve">
+    <value>Archivscan</value>
+  </data>
+  <data name="Contact_Subject_DataAcquisition" xml:space="preserve">
+    <value>Datenerfassung</value>
+  </data>
+  <data name="Contact_Subject_DrawingScanning" xml:space="preserve">
+    <value>Zeichnungscan</value>
+  </data>
+  <data name="Contact_Subject_InvoiceDataEntry" xml:space="preserve">
+    <value>Rechnungserfassung</value>
+  </data>
+  <data name="Contact_Subject_MicrofilmApertureCardScanning" xml:space="preserve">
+    <value>Mikrofilmlochkartenscan</value>
+  </data>
+  <data name="Contact_TelephoneNumber" xml:space="preserve">
+    <value>Telefonnummer</value>
   </data>
   <data name="Contact_Thanks" xml:space="preserve">
     <value>&lt;p&gt;Ihre Fragen und Anregungen sind uns wichtig. Wir setzen uns umgehend mit Ihnen in Verbindung.&lt;/p&gt;
@@ -130,10 +178,28 @@
   <data name="Contact_Title" xml:space="preserve">
     <value>Ihr direkter Draht zu IMR</value>
   </data>
+  <data name="Contact_Town" xml:space="preserve">
+    <value>Ort</value>
+  </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>Impressum</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Startseite</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>Mehr</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Sonstiges</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Qualität</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Absenden</value>
+  </data>
+  <data name="YourChoice" xml:space="preserve">
+    <value>Ihre Auswahl</value>
   </data>
 </root>

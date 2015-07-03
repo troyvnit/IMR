@@ -215,6 +215,7 @@
     <Compile Include="ViewModels\ArticleCategoryVM.cs" />
     <Compile Include="ViewModels\ArticleVM.cs" />
     <Compile Include="ViewModels\ContactVM.cs" />
+    <Compile Include="ViewModels\SettingDetailVM.cs" />
     <Compile Include="ViewModels\SettingVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -231,7 +232,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\bgfooter.gif" />
+    <Content Include="img\icon_company.gif" />
     <Content Include="img\icon_contact.jpg" />
+    <Content Include="img\icon_sectors.gif" />
+    <Content Include="img\icon_services.gif" />
     <Content Include="img\loading-sm.gif" />
     <Content Include="img\loading.gif" />
     <Content Include="img\logo_IMR.gif" />
@@ -392,6 +396,10 @@
     <Content Include="Views\Home\Article.cshtml" />
     <Content Include="Views\Home\_Menu.cshtml" />
     <Content Include="Views\Home\_Header.cshtml" />
+    <Content Include="Views\Home\_Address.cshtml" />
+    <Content Include="Views\Home\Disclaimer.cshtml" />
+    <Content Include="Views\Home\_Contact.cshtml" />
+    <Content Include="Views\Home\Quality.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -440,7 +448,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>5034</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5034/</IISUrl>
+          <IISUrl>http://localhost:5035/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -14,24 +14,12 @@
                 <li class="@currentClass"><a href="/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/a/@ViewBag.CategoryName/@sameCategoryArticle.SeoTitle">@sameCategoryArticle.Title</a></li>
             }
         </ul>
-        <img src="~/img/@Model.Avatar" />
-        <div class="address">
-            <strong>IMR Image-Management GmbH</strong>
-            <br>
-            Neue Weilheimer Straße 14
-            <br>
-            73230 Kirchheim u. Teck
-            <br><br>
-            Tel.: 07021 485078
-            <br>
-            Fax.:  07021 83411
-        </div>
-        <div class="contact">
-            <a href="en/contact.html">
-                <img src="~/img/icon_contact.jpg" alt="">
-                <p>Please use our contact form to get in touch with us.</p>
-            </a>
-        </div>
+        @if (!string.IsNullOrEmpty(Model.Avatar))
+        {
+            <img src="~/img/@Model.Avatar" />
+        }
+        @{Html.RenderAction("_Address", "Home");}
+        @{Html.RenderPartial("_Contact");}
     </div>
 
     <article class="col-sm-9">

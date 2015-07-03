@@ -120,8 +120,56 @@
   <data name="Contact" xml:space="preserve">
     <value>Liên hệ</value>
   </data>
+  <data name="Contact_Callback" xml:space="preserve">
+    <value>Gọi lại</value>
+  </data>
+  <data name="Contact_ContactPerson" xml:space="preserve">
+    <value>Người liên hệ</value>
+  </data>
   <data name="Contact_Description" xml:space="preserve">
     <value>Chúng tôi đánh giá cao câu hỏi của bạn và đánh giá cao đề xuất của bạn. Chúng tôi sẽ liên lạc với bạn nhanh nhất có thể.</value>
+  </data>
+  <data name="Contact_EmailAddress" xml:space="preserve">
+    <value>Thư điện tử</value>
+  </data>
+  <data name="Contact_Firm" xml:space="preserve">
+    <value>Xác nhận</value>
+  </data>
+  <data name="Contact_FreeTrial" xml:space="preserve">
+    <value>Dùng thử</value>
+  </data>
+  <data name="Contact_Message" xml:space="preserve">
+    <value>Lời nhắn</value>
+  </data>
+  <data name="Contact_Please" xml:space="preserve">
+    <value>Vui lòng sử dụng form để liên hệ với chúng tôi</value>
+  </data>
+  <data name="Contact_Postcode" xml:space="preserve">
+    <value>Mã bưu điện</value>
+  </data>
+  <data name="Contact_Street" xml:space="preserve">
+    <value>Đường</value>
+  </data>
+  <data name="Contact_Subject" xml:space="preserve">
+    <value>Chủ đề</value>
+  </data>
+  <data name="Contact_Subject_ArchiveScanning" xml:space="preserve">
+    <value>Quét lưu trữ</value>
+  </data>
+  <data name="Contact_Subject_DataAcquisition" xml:space="preserve">
+    <value>Thu thập dữ liệu</value>
+  </data>
+  <data name="Contact_Subject_DrawingScanning" xml:space="preserve">
+    <value>Quét vẽ</value>
+  </data>
+  <data name="Contact_Subject_InvoiceDataEntry" xml:space="preserve">
+    <value>Dữ liệu đầu vào hóa đơn</value>
+  </data>
+  <data name="Contact_Subject_MicrofilmApertureCardScanning" xml:space="preserve">
+    <value>Thẻ quét khẩu độ dạng film</value>
+  </data>
+  <data name="Contact_TelephoneNumber" xml:space="preserve">
+    <value>Số điện thoại</value>
   </data>
   <data name="Contact_Thanks" xml:space="preserve">
     <value>Cảm ơn</value>
@@ -129,10 +177,28 @@
   <data name="Contact_Title" xml:space="preserve">
     <value>Liên hệ IMR</value>
   </data>
+  <data name="Contact_Town" xml:space="preserve">
+    <value>Tỉnh/Thành phố</value>
+  </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>Trách nhiệm</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Trang chủ</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>Xem thêm</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Khác</value>
+  </data>
+  <data name="Quality" xml:space="preserve">
+    <value>Chất lượng</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Gửi</value>
+  </data>
+  <data name="YourChoice" xml:space="preserve">
+    <value>Lựa chọn của bạn</value>
   </data>
 </root>

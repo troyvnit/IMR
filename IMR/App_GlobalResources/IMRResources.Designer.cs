@@ -70,11 +70,155 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gọi lại.
+        /// </summary>
+        internal static string Contact_Callback {
+            get {
+                return ResourceManager.GetString("Contact_Callback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Người liên hệ.
+        /// </summary>
+        internal static string Contact_ContactPerson {
+            get {
+                return ResourceManager.GetString("Contact_ContactPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chúng tôi đánh giá cao câu hỏi của bạn và đánh giá cao đề xuất của bạn. Chúng tôi sẽ liên lạc với bạn nhanh nhất có thể..
         /// </summary>
         internal static string Contact_Description {
             get {
                 return ResourceManager.GetString("Contact_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thư điện tử.
+        /// </summary>
+        internal static string Contact_EmailAddress {
+            get {
+                return ResourceManager.GetString("Contact_EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xác nhận.
+        /// </summary>
+        internal static string Contact_Firm {
+            get {
+                return ResourceManager.GetString("Contact_Firm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dùng thử.
+        /// </summary>
+        internal static string Contact_FreeTrial {
+            get {
+                return ResourceManager.GetString("Contact_FreeTrial", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lời nhắn.
+        /// </summary>
+        internal static string Contact_Message {
+            get {
+                return ResourceManager.GetString("Contact_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vui lòng sử dụng form để liên hệ với chúng tôi.
+        /// </summary>
+        internal static string Contact_Please {
+            get {
+                return ResourceManager.GetString("Contact_Please", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã bưu điện.
+        /// </summary>
+        internal static string Contact_Postcode {
+            get {
+                return ResourceManager.GetString("Contact_Postcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đường.
+        /// </summary>
+        internal static string Contact_Street {
+            get {
+                return ResourceManager.GetString("Contact_Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chủ đề.
+        /// </summary>
+        internal static string Contact_Subject {
+            get {
+                return ResourceManager.GetString("Contact_Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quét lưu trữ.
+        /// </summary>
+        internal static string Contact_Subject_ArchiveScanning {
+            get {
+                return ResourceManager.GetString("Contact_Subject_ArchiveScanning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thu thập dữ liệu.
+        /// </summary>
+        internal static string Contact_Subject_DataAcquisition {
+            get {
+                return ResourceManager.GetString("Contact_Subject_DataAcquisition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quét vẽ.
+        /// </summary>
+        internal static string Contact_Subject_DrawingScanning {
+            get {
+                return ResourceManager.GetString("Contact_Subject_DrawingScanning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dữ liệu đầu vào hóa đơn.
+        /// </summary>
+        internal static string Contact_Subject_InvoiceDataEntry {
+            get {
+                return ResourceManager.GetString("Contact_Subject_InvoiceDataEntry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thẻ quét khẩu độ dạng film.
+        /// </summary>
+        internal static string Contact_Subject_MicrofilmApertureCardScanning {
+            get {
+                return ResourceManager.GetString("Contact_Subject_MicrofilmApertureCardScanning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số điện thoại.
+        /// </summary>
+        internal static string Contact_TelephoneNumber {
+            get {
+                return ResourceManager.GetString("Contact_TelephoneNumber", resourceCulture);
             }
         }
         
@@ -97,6 +241,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tỉnh/Thành phố.
+        /// </summary>
+        internal static string Contact_Town {
+            get {
+                return ResourceManager.GetString("Contact_Town", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trách nhiệm.
         /// </summary>
         internal static string Disclaimer {
@@ -111,6 +264,51 @@ namespace Resources {
         internal static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xem thêm.
+        /// </summary>
+        internal static string More {
+            get {
+                return ResourceManager.GetString("More", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Khác.
+        /// </summary>
+        internal static string Other {
+            get {
+                return ResourceManager.GetString("Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chất lượng.
+        /// </summary>
+        internal static string Quality {
+            get {
+                return ResourceManager.GetString("Quality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gửi.
+        /// </summary>
+        internal static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lựa chọn của bạn.
+        /// </summary>
+        internal static string YourChoice {
+            get {
+                return ResourceManager.GetString("YourChoice", resourceCulture);
             }
         }
     }

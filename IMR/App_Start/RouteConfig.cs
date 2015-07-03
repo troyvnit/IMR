@@ -22,6 +22,20 @@ namespace IMR
             );
 
             routes.MapRoute(
+                name: "Disclaimer",
+                url: "{culture}/{disclaimer}",
+                defaults: new { controller = "Home", action = "Disclaimer", culture = UrlParameter.Optional },
+                constraints: new { disclaimer = new DisclaimerConstraint() }
+            );
+
+            routes.MapRoute(
+                name: "Quality",
+                url: "{culture}/{quality}",
+                defaults: new { controller = "Home", action = "Quality", culture = UrlParameter.Optional },
+                constraints: new { quality = new QualityConstraint() }
+            );
+
+            routes.MapRoute(
                 name: "ArticleInternationalization",
                 url: "{culture}/a/{category}/{seoTitle}",
                 defaults: new { controller = "Home", action = "Article", seoTitle = UrlParameter.Optional },
@@ -56,6 +70,26 @@ namespace IMR
             return values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("en")), StringComparison.OrdinalIgnoreCase)
                 || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("de")), StringComparison.OrdinalIgnoreCase)
                 || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("vi")), StringComparison.OrdinalIgnoreCase); 
+        }
+    }
+
+    public class DisclaimerConstraint : IRouteConstraint
+    {
+        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+        {
+            return values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Disclaimer", CultureInfo.CreateSpecificCulture("en")), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Disclaimer", CultureInfo.CreateSpecificCulture("de")), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Disclaimer", CultureInfo.CreateSpecificCulture("vi")), StringComparison.OrdinalIgnoreCase);
+        }
+    }
+
+    public class QualityConstraint : IRouteConstraint
+    {
+        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+        {
+            return values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Quality", CultureInfo.CreateSpecificCulture("en")), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Quality", CultureInfo.CreateSpecificCulture("de")), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Quality", CultureInfo.CreateSpecificCulture("vi")), StringComparison.OrdinalIgnoreCase);
         }
     } 
 }
