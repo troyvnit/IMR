@@ -150,7 +150,7 @@ namespace IMR.DAL
                             Language = Language.Vi, 
                             Name = "CÔNG TY", 
                             Description = "<p>Đang cập nhật...</p>",
-                            Link = "/a/công ty"
+                            Link = "/a/cong-ty"
                         }
                     }
                 },
@@ -178,7 +178,7 @@ namespace IMR.DAL
                             Language = Language.Vi, 
                             Name = "DỊCH VỤ", 
                             Description = "<p>Đang cập nhật...</p>",
-                            Link = "/a/dịch vụ"
+                            Link = "/a/dich-vu"
                         }
                     }
                 },
@@ -206,7 +206,7 @@ namespace IMR.DAL
                             Language = Language.Vi, 
                             Name = "LĨNH VỰC", 
                             Description = "<p>Đang cập nhật...</p>",
-                            Link = "/a/lĩnh vực"
+                            Link = "/a/linh-vuc"
                         }
                     }
                 },

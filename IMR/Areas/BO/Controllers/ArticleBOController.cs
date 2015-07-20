@@ -74,6 +74,10 @@ namespace IMR.Areas.BO.Controllers
             if (article.ArticleId != 0)
             {
                 db.Entry(article).State = EntityState.Modified;
+                foreach (var articleDetail in article.ArticleDetails)
+                {
+                    db.Entry(articleDetail).State = EntityState.Modified;
+                }
                 db.SaveChanges();
             }
             else

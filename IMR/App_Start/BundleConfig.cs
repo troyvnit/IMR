@@ -37,6 +37,8 @@ namespace IMR
                       "~/Content/fileinput.css",
                       "~/Content/bootstrap-tagsinput.css",
                       "~/Content/bosite.css"));
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

@@ -66,6 +66,10 @@ namespace IMR.Areas.BO.Controllers
                 if (setting.SettingId != 0)
                 {
                     db.Entry(setting).State = EntityState.Modified;
+                    foreach (var settingDetail in setting.SettingDetails)
+                    {
+                        db.Entry(settingDetail).State = EntityState.Modified;
+                    }
                     db.SaveChanges();
                 }
                 else
