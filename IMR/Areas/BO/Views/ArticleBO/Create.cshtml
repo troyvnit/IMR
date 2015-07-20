@@ -210,7 +210,7 @@
             showRemove: false,
             showUpload: false,
             initialPreview: [
-                "<img src='/img/@Model.Avatar' class='file-preview-image' alt='@Model.Avatar' title='@Model.Avatar' style='width:100%;height:auto;'><div class='file-thumbnail-footer'><div class='file-caption-name' title='@Model.Avatar'>@Model.Avatar</div></div>"
+                "<img src='@Url.Content("~/img/" + Model.Avatar)' class='file-preview-image' alt='@Model.Avatar' title='@Model.Avatar' style='width:100%;height:auto;'><div class='file-thumbnail-footer'><div class='file-caption-name' title='@Model.Avatar'>@Model.Avatar</div></div>"
             ],
             previewSettings: {
                 image: { width: "100%", height: "auto" }

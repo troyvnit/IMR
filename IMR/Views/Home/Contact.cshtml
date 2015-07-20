@@ -1,4 +1,5 @@
 ﻿@using System.Threading;
+@using IMR.Utils;
 @model IMR.ViewModels.ContactVM
 @{
     ViewBag.Title = Resources.IMRResources.Contact;
@@ -7,8 +8,8 @@
 <div class="row">
     <div class="col-sm-3 left-panel">
         <ul class="unternavigation">
-            <li class="current"><a href="/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/@Resources.IMRResources.Contact">@Resources.IMRResources.Contact</a></li>
-            <li><a href="/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/@Resources.IMRResources.Disclaimer">@Resources.IMRResources.Disclaimer</a></li>
+            <li class="current"><a href="~/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/@Resources.IMRResources.Contact.GenerateSeoTitle()">@Resources.IMRResources.Contact</a></li>
+            <li><a href="~/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/@Resources.IMRResources.Disclaimer.GenerateSeoTitle()">@Resources.IMRResources.Disclaimer</a></li>
         </ul>
         @{Html.RenderAction("_Address", "Home");}
     </div>

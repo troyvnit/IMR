@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using IMR.Utils;
 
 namespace IMR
 {
@@ -67,9 +68,9 @@ namespace IMR
     {
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
-            return values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("en")), StringComparison.OrdinalIgnoreCase)
-                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("de")), StringComparison.OrdinalIgnoreCase)
-                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("vi")), StringComparison.OrdinalIgnoreCase); 
+            return values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("en")).GenerateSeoTitle(), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("de")).GenerateSeoTitle(), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Contact", CultureInfo.CreateSpecificCulture("vi")).GenerateSeoTitle(), StringComparison.OrdinalIgnoreCase); 
         }
     }
 
@@ -77,9 +78,9 @@ namespace IMR
     {
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
-            return values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Disclaimer", CultureInfo.CreateSpecificCulture("en")), StringComparison.OrdinalIgnoreCase)
-                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Disclaimer", CultureInfo.CreateSpecificCulture("de")), StringComparison.OrdinalIgnoreCase)
-                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Disclaimer", CultureInfo.CreateSpecificCulture("vi")), StringComparison.OrdinalIgnoreCase);
+            return values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Disclaimer", CultureInfo.CreateSpecificCulture("en")).GenerateSeoTitle(), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Disclaimer", CultureInfo.CreateSpecificCulture("de")).GenerateSeoTitle(), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Disclaimer", CultureInfo.CreateSpecificCulture("vi")).GenerateSeoTitle(), StringComparison.OrdinalIgnoreCase);
         }
     }
 
@@ -87,9 +88,9 @@ namespace IMR
     {
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
-            return values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Quality", CultureInfo.CreateSpecificCulture("en")), StringComparison.OrdinalIgnoreCase)
-                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Quality", CultureInfo.CreateSpecificCulture("de")), StringComparison.OrdinalIgnoreCase)
-                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Quality", CultureInfo.CreateSpecificCulture("vi")), StringComparison.OrdinalIgnoreCase);
+            return values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Quality", CultureInfo.CreateSpecificCulture("en")).GenerateSeoTitle(), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Quality", CultureInfo.CreateSpecificCulture("de")).GenerateSeoTitle(), StringComparison.OrdinalIgnoreCase)
+                || values[parameterName].ToString().Equals(Resources.IMRResources.ResourceManager.GetString("Quality", CultureInfo.CreateSpecificCulture("vi")).GenerateSeoTitle(), StringComparison.OrdinalIgnoreCase);
         }
     } 
 }

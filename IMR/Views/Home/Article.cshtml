@@ -11,7 +11,7 @@
             @foreach (var sameCategoryArticle in sameCategoryArticles)
             {
                 var currentClass = sameCategoryArticle.ArticleId == Model.ArticleId ? "current" : "";
-                <li class="@currentClass"><a href="/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/a/@ViewBag.CategoryName/@sameCategoryArticle.SeoTitle">@sameCategoryArticle.Title</a></li>
+                <li class="@currentClass"><a href="~/@Thread.CurrentThread.CurrentUICulture.Name.Substring(0, 2)/a/@ViewBag.CategoryName/@sameCategoryArticle.SeoTitle">@sameCategoryArticle.Title</a></li>
             }
         </ul>
         @if (!string.IsNullOrEmpty(Model.Avatar))

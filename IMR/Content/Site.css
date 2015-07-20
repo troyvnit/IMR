@@ -134,7 +134,7 @@ textarea {
 }
 
 footer{
-   background: url(/img/bgfooter.gif) no-repeat bottom;
+   background: url(../img/bgfooter.gif) no-repeat bottom;
    min-height: 135px;
    font-size: 12px;
 }
@@ -203,11 +203,11 @@ article .content{
     color: #666666;
   text-decoration: none;
       padding-left: 20px;
-  background: url(/img/punkt_unternavigation.gif) no-repeat 0 3px;
+  background: url(../img/punkt_unternavigation.gif) no-repeat 0 3px;
 }
 
 .left-panel .unternavigation li a:hover, .left-panel .unternavigation li.current a{
-  background: url(/img/punkt_unternavigation_hover.gif) no-repeat 0 3px;
+  background: url(../img/punkt_unternavigation_hover.gif) no-repeat 0 3px;
 }
 
 .left-panel .unternavigation li.current a {
