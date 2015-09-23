@@ -15,6 +15,7 @@ using IMR.Utils;
 
 namespace IMR.Areas.BO.Controllers
 {
+    [Authorize]
     public class ArticleBOController : Controller
     {
         private IMRContext db = new IMRContext();
