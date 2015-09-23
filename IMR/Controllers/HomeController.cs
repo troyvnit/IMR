@@ -56,9 +56,9 @@ namespace IMR.Controllers
             var deUrl = "de";
             var viUrl = "vi";
             if(category != null){
-                enUrl += "/a/" + category.ArticleCategoryDetails.FirstOrDefault(ac => ac.Language == Language.En).Name;
-                deUrl += "/a/" + category.ArticleCategoryDetails.FirstOrDefault(ac => ac.Language == Language.De).Name;
-                viUrl += "/a/" + category.ArticleCategoryDetails.FirstOrDefault(ac => ac.Language == Language.Vi).Name;
+                enUrl += "/a/" + category.ArticleCategoryDetails.FirstOrDefault(ac => ac.Language == Language.En).Name.GenerateSeoTitle().ToLower();
+                deUrl += "/a/" + category.ArticleCategoryDetails.FirstOrDefault(ac => ac.Language == Language.De).Name.GenerateSeoTitle().ToLower();
+                viUrl += "/a/" + category.ArticleCategoryDetails.FirstOrDefault(ac => ac.Language == Language.Vi).Name.GenerateSeoTitle().ToLower();
             }
             if(article != null){
                 enUrl += "/" + article.ArticleDetails.FirstOrDefault(a => a.Language == Language.En).SeoTitle;

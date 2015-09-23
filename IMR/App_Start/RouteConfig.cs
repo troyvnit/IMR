@@ -13,6 +13,8 @@ namespace IMR
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.LowercaseUrls = true;
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
