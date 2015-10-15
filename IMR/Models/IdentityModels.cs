@@ -21,7 +21,7 @@ namespace IMR.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("IMRContext", throwIfV1Schema: false)
         {
         }
 

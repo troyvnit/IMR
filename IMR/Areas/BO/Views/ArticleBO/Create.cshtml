@@ -92,7 +92,7 @@
                                             </td>
                                             <td class="col-md-2">
                                                 <a class="btn btn-info" href="#" onclick="editArticleCategory(this, '@itemJson')"><span class=" glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                                                <a class="btn btn-danger" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                                                <a class="btn btn-danger" href="#" onclick="deleteArticleCategory(this, @item.ArticleCategoryId)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
                                             </td>
                                         </tr>
                                     }
@@ -288,11 +288,11 @@
         });
         $('#newCategory').removeClass('hide');
     }
-    function editArticleCategory(row, itemJson) {
-        var item = $.parseJSON(itemJson);
+    function editArticleCategory(btn, itemJson) {
+        var item = typeof itemJson == 'string' ? $.parseJSON(itemJson) : itemJson;
         $('#listCategoryModal .hide').removeClass('hide');
-        $(row.closest('tr')).after($('#newCategory'));
-        $(row.closest('tr')).addClass('hide');
+        $(btn.closest('tr')).after($('#newCategory'));
+        $(btn.closest('tr')).addClass('hide');
         $.each(item, function (key, value) {
             $('#newCategory input[name="' + key + '"]').val(value);
         });
@@ -311,12 +311,15 @@
                 method: 'POST',
                 url: '@Url.Action("CreateCategory")',
                 data: data
-            }).done(function (result) {
-                var template = '<tr><td class="col-md-1">' + result.ArticleCategoryId + '</td><td class="col-md-3">' + result.NameEn + '</td><td class="col-md-3">' + result.NameDe + '</td><td class="col-md-3">' + result.NameVi + '</td><td class="col-md-1">' + result.MainArticleId + '</td><td class="col-md-2"><a class="btn btn-info" href="#" onclick="editArticleCategory(this, ' + result.ArticleCategoryId + ', \'' + result.Name + '\', ' + result.MainArticleId + ')"><span class=" glyphicon glyphicon-edit" aria-hidden="true"></span></a><a class="btn btn-danger" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></tr>';
+        }).done(function (result) {
+          var itemJson = JSON.stringify(result).replace(/\\"/g, '\\"');
+              var template = '<tr><td class="col-md-1">' + result.ArticleCategoryId + '</td><td class="col-md-3">' + result.NameEn + '</td><td class="col-md-3">' + result.NameDe + '</td><td class="col-md-3">' + result.NameVi + '</td><td class="col-md-1">' + result.MainArticleId + '</td><td class="col-md-2"><a class="btn btn-info" href="#"><span class=" glyphicon glyphicon-edit" aria-hidden="true"></span></a><a class="btn btn-danger" href="#" onclick="deleteArticleCategory(this, ' + result.ArticleCategoryId + ')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></tr>';
                 if ($('#listCategoryModal .hide').length == 0) {
-                    $('#listCategoryModal table tr').first().after(template);
+                  $('#listCategoryModal table tr').first().after(template);
+                  $('#listCategoryModal table tr td a').first().attr('onclick', 'editArticleCategory(this, ' + itemJson + ')');
                 } else {
-                    $('#listCategoryModal .hide').after(template);
+                  $('#listCategoryModal .hide').after(template);
+                  $('#listCategoryModal .hide').next().find('td a').first().attr('onclick', 'editArticleCategory(this, ' + itemJson + ')');
                     $('#listCategoryModal .hide').remove();
                 }
                 $('#newCategory').addClass('hide');
@@ -327,6 +330,17 @@
                     $('#ArticleCategoryId').append('<option value="' + result.ArticleCategoryId + '">' + result.NameEn + '</option>')
                 }
             });
-        }
-    </script>
+    }
+      function deleteArticleCategory(btn, id) {
+      $.ajax({
+        method: 'POST',
+        url: '@Url.Action("DeleteCategory")',
+        data: { id: id }
+      }).done(function (result) {
+        btn.closest('tr').remove();
+        var options = $('#ArticleCategoryId option[value=' + id + ']');
+        options.remove();
+      });
+    }
+</script>
 }

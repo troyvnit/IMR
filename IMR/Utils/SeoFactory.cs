@@ -12,6 +12,10 @@ namespace IMR.Utils
     {
         public static string GenerateSeoTitle(this string title)
         {
+            if (string.IsNullOrEmpty(title))
+            {
+                return string.Empty;
+            }
             var normalizedString = title.Normalize(NormalizationForm.FormD);
             var stringBuilder = new StringBuilder(title.Length);
             foreach (var c in normalizedString.ToLower().ToCharArray())

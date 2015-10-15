@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using IMR.Utils;
+using IMR.Models;
 
 namespace IMR.Controllers
 {
@@ -50,7 +51,23 @@ namespace IMR.Controllers
         {
             var currentCategory = Request.RequestContext.RouteData.Values["category"];
             var currentSeoTitle = Request.RequestContext.RouteData.Values["seoTitle"];
-            var category = db.ArticleCategories.Include(ac => ac.ArticleCategoryDetails).FirstOrDefault(ac => ac.ArticleCategoryDetails.Count(acd => acd.Name == currentCategory) > 0);
+            var categories = db.ArticleCategories.Include(ac => ac.ArticleCategoryDetails).ToList();
+            //ArticleCategory category = null;
+            //bool found = false;
+            //foreach (var c in categories)
+            //{
+            //    if (found) break;
+            //    foreach (var cd in c.ArticleCategoryDetails)
+            //    {
+            //        if (cd.Name.GenerateSeoTitle() == currentCategory)
+            //        {
+            //            category = c;
+            //            found = true;
+            //            break;
+            //        }
+            //    }
+            //}
+            var category = categories.FirstOrDefault(ac => ac.ArticleCategoryDetails.Count(acd => acd.Name.GenerateSeoTitle().Equals(currentCategory)) > 0);
             var article = db.Articles.Include(a => a.ArticleDetails).FirstOrDefault(a => a.ArticleDetails.Count(ad => ad.SeoTitle == currentSeoTitle) > 0);
             var enUrl = "en";
             var deUrl = "de";

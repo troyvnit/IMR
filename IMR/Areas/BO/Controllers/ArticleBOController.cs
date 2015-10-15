@@ -102,7 +102,7 @@ namespace IMR.Areas.BO.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
+            Article article = db.Articles.Include(a => a.ArticleDetails).FirstOrDefault(a => a.ArticleId == id);
             if (article == null)
             {
                 return HttpNotFound();
@@ -139,6 +139,10 @@ namespace IMR.Areas.BO.Controllers
             if (articleCategory.ArticleCategoryId != 0)
             {
                 db.Entry(articleCategory).State = EntityState.Modified;
+                foreach (var articleCategoryDetail in articleCategory.ArticleCategoryDetails)
+                {
+                    db.Entry(articleCategoryDetail).State = EntityState.Modified;
+                }
                 db.SaveChanges();
             }
             else
@@ -147,6 +151,14 @@ namespace IMR.Areas.BO.Controllers
                 db.SaveChanges();
             }
             return Json(Mapper.Map<ArticleCategoryBO>(articleCategory), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DeleteCategory(int id)
+        {
+            var articleCategory = db.ArticleCategories.Find(id);
+            db.ArticleCategories.Remove(articleCategory);
+            db.SaveChanges();
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
